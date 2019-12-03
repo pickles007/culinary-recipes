@@ -5,8 +5,8 @@
         <div class="row d-flex justify-content-center">
             <div class="menu-content pb-70 col-lg-8">
                 <div class="title text-center">
-                    <h1 class="mb-10">Мої рецепти</h1>
-                    <!-- <p>Тут відображено останні додані нашими користувачами нові рецепти.</p> -->
+                    <h1 class="mb-10">Останнє з нашого блогу</h1>
+                    <p>Тут відображено останні додані нашими користувачами нові рецепти.</p>
                     <?php
                         if(!isset($_SESSION["MyID"])){
                             echo "<p style='color:red;'>Зареєструйтесь для повноцінного користування всіма функціями нашого блогу!</p>";
@@ -33,7 +33,7 @@
             echo "<form method='get'>";
             echo "<input name='idRecipe' type='text' value='".$row["id"]."' style='display:none;'>";
             echo "<button type='submit' value='view_news' name='action'><h4>".$row["name"]."</h4></button>";
-            // echo "<button type='submit' name='fav'><h4>Додати до улюблених</h4></button>";
+            echo "<button type='submit' name='fav'><h4>Додати до улюблених</h4></button>";
             echo "</form>";
             echo "<p>".mb_strimwidth($row["cooking_desc"], 0, 45, "...")."</p>";
             echo "</div>";

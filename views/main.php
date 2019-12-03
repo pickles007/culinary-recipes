@@ -21,8 +21,8 @@
 <?php
 	include_once "views/sql_include.php";
     $MyData = new mysqli($host, $user, $pass, $database);
-    $allnews = $MyData->query("SELECT * FROM `recipe` ORDER BY `date` DESC LIMIT 16");
     $MyData->query("SET NAMES 'utf8'");
+    $allnews = $MyData->query("SELECT * FROM `recipe` ORDER BY `date` DESC LIMIT 16"); 
     if(isset($_SESSION["MyID"])){
         while(($row = $allnews->fetch_assoc())!=false){
             echo "<div class='col-lg-3 col-md-6 col-sm-6 single-blog'>";
@@ -30,10 +30,11 @@
             echo "<p class='date'>".date("d-m-Y", strtotime($row["date"]))."</p>";
             echo "<form method='get'>";
             echo "<input name='idRecipe' type='text' value='".$row["id"]."' style='display:none;'>";
-            echo "<button type='submit' value='view_news' name='action'><h4>".$row["name"]."</h4></button>";
+            echo "<button type='submit' value='fullrecipe' name='action'><h4>".$row["name"]."</h4></button>";
             echo "<button type='submit' name='fav'><h4>Додати до улюблених</h4></button>";
             echo "</form>";
             echo "<p>".mb_strimwidth($row["cooking_desc"], 0, 45, "...")."</p>";
+            //echo "<button type='submit' name='fullrecipe' value='".$row["id"]."'><h4>Додати до улюблених</h4></button>";
             echo "</div>";
         }
     } else {
@@ -43,7 +44,7 @@
 			echo "<p class='date'>".date("d-m-Y", strtotime($row["date"]))."</p>";
             echo "<form method='get'>";
             echo "<input name='id' type='text' value='".$row["id"]."' style='display:none;'>";
-			echo "<button type='submit' value='view_news' name='action'><h4>".$row["name"]."</h4></button>";
+			echo "<button type='submit' value='fullrecipe' name='action'><h4>".$row["name"]."</h4></button>";
             echo "</form>";
 			echo "<p>".mb_strimwidth($row["cooking_desc"], 0, 45, "...")."</p>";
             echo "</div>";

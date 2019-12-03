@@ -508,31 +508,31 @@ padding: 60px 50px;
             <div class="card card-2">
                 <!-- <div class="card-heading"></div> -->
                 <div class="card-body">
-                    <h2 class="title">Реєстрація</h2>
+                    <h2 class="title">Sigh in</h2>
                     <form method="POST">
                         <div class="input-group">
-                            <input class="input--style-2" type="text" required placeholder="Surname" name="surname">
+                            <input class="input--style-2" type="text" placeholder="Surname" name="surname">
                         </div>
                         <div class="input-group">
-                            <input class="input--style-2" type="text" required placeholder="Name" name="name">
+                            <input class="input--style-2" type="text" placeholder="Name" name="name">
                          </div>
                         <div class="input-group">
-                            <input class="input--style-2" type="text" required placeholder="Email" name="email">
+                            <input class="input--style-2" type="text" placeholder="Email" name="email">
                         </div>
                             <div class="input-group">
-                                <input class="input--style-2" type="text" required placeholder="Phone" name="phone">
+                                <input class="input--style-2" type="text" placeholder="Phone" name="phone">
                             </div>
                             <div class="input-group">
-                                <input class="input--style-2" type="text" required placeholder="Login" name="login">
+                                <input class="input--style-2" type="text" placeholder="Login" name="login">
                             </div>
                             <div class="input-group">
-                                <input class="input--style-2" type="password" required placeholder="Password" name="password">
+                                <input class="input--style-2" type="password" placeholder="Password" name="password">
                             </div>
                             <div class="input-group">
-                                <input class="input--style-2" type="password" required placeholder="Repeat Password" name="password1">
+                                <input class="input--style-2" type="password" placeholder="Repeat Password" name="password1">
                             </div>
                         <div class="p-t-30">
-                            <button class="btn btn--radius btn--green" type="submit">Зареєструватися</button>
+                            <button class="btn btn--radius btn--green" type="submit">Register</button>
                         </div>
                     </form>
                 </div>

@@ -520,7 +520,7 @@ padding: 60px 50px;
 		$result = $MyData->query("SELECT `login`, `id`, `password` FROM `users` WHERE `login` = '$login'");
         if($result->num_rows == 0)
         {
-			$errorMsg="Неправильний логін, або пароль!";
+            echo "error";
             exit;
         } else {
             $row = $result->fetch_assoc();
@@ -556,17 +556,17 @@ padding: 60px 50px;
 		<div class="card card-2">
 			<div class="card-heading"></div>
 			<div class="card-body">
-				<h2 class="title">Вхід</h2>
+				<h2 class="title">Sign in</h2>
 					<form method="POST">
 						<?=$errorMsg?>
 						<div class="input-group">
-							<input class="input--style-2" type="text" required placeholder="Login" name="login">
+							<input class="input--style-2" type="text" placeholder="Login" name="login">
 						</div>
 						<div class="input-group">
-							<input class="input--style-2" type="password" required placeholder="Password" name="password">
+							<input class="input--style-2" type="password" placeholder="Password" name="password">
 						</div>
 						<div class="p-t-30">
-							<button name="send" class="btn btn--radius btn--green" type="submit">Увійти</button>
+							<button name="send" class="btn btn--radius btn--green" type="submit">Sign in</button>
 						</div>
 					</form>
 				</div>

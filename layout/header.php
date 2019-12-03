@@ -29,6 +29,7 @@
         <link rel="stylesheet" href="css/animate.min.css">
         <link rel="stylesheet" href="css/owl.carousel.css">
         <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
     </head>
     <body>
         <header id="header">
@@ -50,22 +51,72 @@
                       <li class="menu-has-children"><a href="">Категорії</a>
                         <ul>
                               <li class="menu-has-children"><a href="">За кухнею </a>
-                                <ul>
-                                  <li><a href="#">Російська</a></li>
-                                  <li><a href="#">Французька</a></li>
-                                  <li><a href="#">Італійська</a></li>
-                                  <li><a href="#">Українська</a></li>
-                                  <li><a href="#">Азіатська</a></li>
+                                <ul class="nav-menu">
+                                  <li>
+                                    <form method = "get">
+                                      <input name="cuisinename" type='text' value='Російська' style='display:none;'>
+                                      <button style="border: white; background: white;" type='submit' value='bycuisine' name='action'>Російська</butston>
+                                        </form>
+                                    </li>
+                                     <li>
+                                      <form method = "get">
+                                        <input name="cuisinename" type='text' value='Французька' style='display:none;'>
+                                        <button style="border: white; background: white;" type='submit' value='bycuisine' name='action'>Французька</button>
+                                      </form>
+                                    </li>
+                                  <li>
+                                    <form method = "get">
+                                      <input name="cuisinename" type='text' value='Італійська' style='display:none;'>
+                                      <button style="border: white; background: white;" type='submit' value='bycuisine' name='action'>Італійська</button>
+                                      </form>
+                                    </li>
+                                  <li>
+                                    <form method = "get">
+                                      <input name="cuisinename" type='text' value='Українська' style='display:none;'>
+                                      <button style="border: white; background: white;" type='submit' value='bycuisine' name='action'>Українська</button>
+                                      </form>
+                                    </li>
+                                  <li>
+                                    <form method = "get">
+                                      <input name="cuisinename" type='text' value='Азіатська' style='display:none;'>
+                                      <button style="border: white; background: white;" type='submit' value='bycuisine' name='action'>Азіатська</button>
+                                    </form>
+                                  </li>
                                 </ul>
                               </li>
 
                               <li class="menu-has-children"><a href="">За типом страви </a>
                                 <ul>
-                                  <li><a href="#">Закуски</a></li>
-                                  <li><a href="#">Салати</a></li>
-                                  <li><a href="#">Перші страви</a></li>
-                                  <li><a href="#">Другі страви</a></li>
-                                  <li><a href="#">Десерти</a></li>
+                                  <li>
+                                    <form method = "get">
+                                      <input name="dishtype" type='text' value='Закуски' style='display:none;'>
+                                      <button style="border: white; background: white;" type='submit' value='bydishtype' name='action'>Закуски</butston>
+                                    </form>
+                                  </li>
+                                  <li>
+                                    <form method = "get">
+                                      <input name="dishtype" type='text' value='Салати' style='display:none;'>
+                                      <button style="border: white; background: white;" type='submit' value='bydishtype' name='action'>Салати</butston>
+                                    </form>
+                                  </li>
+                                  <li>
+                                    <form method = "get">
+                                      <input name="dishtype" type='text' value='Перші Страви' style='display:none;'>
+                                      <button style="border: white; background: white;" type='submit' value='bydishtype' name='action'>Перші страви</butston>
+                                    </form>
+                                  </li>
+                                  <li>
+                                    <form method = "get">
+                                      <input name="dishtype" type='text' value='Другі Страви' style='display:none;'>
+                                      <button style="border: white; background: white;" type='submit' value='bydishtype' name='action'>Другі страви</butston>
+                                    </form>
+                                  </li>
+                                  <li>
+                                    <form method = "get">
+                                      <input name="dishtype" type='text' value='Десерти' style='display:none;'>
+                                      <button style="border: white; background: white;" type='submit' value='bydishtype' name='action'>Десерти</butston>
+                                    </form>
+                                  </li>
                                 </ul>
                               </li>
 

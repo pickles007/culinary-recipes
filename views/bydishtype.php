@@ -12,7 +12,7 @@
     include_once "views/sql_include.php";
     $MyData = new mysqli($host, $user, $pass, $database);
     $MyData->query("SET NAMES 'utf8'");
-    $allrecipes = $MyData->query("SELECT `recipe`.`id`, `recipe`.`name`, `recipe`.`photo`, `recipe`.`cooking_desc`, `recipe`.`date`, `dish_type`.`name` FROM `recipe` 
+    $allrecipes = $MyData->query("SELECT `recipe`.`id`, `recipe`.`name`, `recipe`.`photo`, `recipe`.`cooking_desc`, `recipe`.`date`, `dish_type`.`name` FROM `recipe`
         INNER JOIN `dish_type` ON `recipe`.`dish_type_id`=`dish_type`.`id`
         WHERE `dish_type`.`name` = '".$dishtype."' ORDER BY `date` DESC");
     if($allrecipes->num_rows==0){
@@ -69,11 +69,11 @@
 		}
     }
 
-    if(isset($_GET["fav"]) && isset($_SESSION["MyID"])){
-        $user_id = $_SESSION['MyID'];
-        $recipe_id = $_GET['idRecipe'];
-        $MyData->query("INSERT INTO `favorite_recipe` (`user_id`, `recipe_id`) VALUES ('$user_id', '$recipe_id')");
-    }
+    // if(isset($_GET["fav"]) && isset($_SESSION["MyID"])){
+    //     $user_id = $_SESSION['MyID'];
+    //     $recipe_id = $_GET['idRecipe'];
+    //     $MyData->query("INSERT INTO `favorite_recipe` (`user_id`, `recipe_id`) VALUES ('$user_id', '$recipe_id')");
+    // }
 
 	$MyData->close();
 ?>

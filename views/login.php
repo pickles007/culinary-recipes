@@ -517,13 +517,21 @@ padding: 60px 50px;
         include_once "views/sql_include.php";
         $MyData = new mysqli($host, $user, $pass, $database);
 		$MyData->query("SET NAMES 'utf8'");
-		$result = $MyData->query("SELECT `login`, `id`, `password` FROM `users` WHERE `login` = '$login'");
-        if($result->num_rows == 0)
+		$resultLogin = $MyData->query("SELECT `login`, `id`, `password` FROM `users` WHERE `login` = '$login'");
+		$resultEmail = $MyData->query("SELECT `login`, `id`, `password` FROM `users` WHERE `email` = '$login'");
+        if($resultLogin->num_rows == 0 && $resultEmail->num_rows == 0)
         {
-            echo "error";
+            echo "Такого логіна чи E-mail адреси не зареєстровано!";
+			$errorMsg="Такого логіна чи E-mail адреси не зареєстровано!";
+			include_once 'layout/footer.php';
             exit;
         } else {
-            $row = $result->fetch_assoc();
+			$row;
+			if($resultLogin->num_rows > 0){
+            	$row = $resultLogin->fetch_assoc();
+			} else if($resultEmail->num_rows > 0){
+				$row = $resultEmail->fetch_assoc();
+			}
             $loginFlag=true;
             $MyID=$row["id"];
 			if($password == $row['password']){
@@ -560,10 +568,10 @@ padding: 60px 50px;
 					<form method="POST">
 						<?=$errorMsg?>
 						<div class="input-group">
-							<input class="input--style-2" type="text" placeholder="Login" name="login">
+							<input class="input--style-2" type="text" required placeholder="Login" name="login">
 						</div>
 						<div class="input-group">
-							<input class="input--style-2" type="password" placeholder="Password" name="password">
+							<input class="input--style-2" type="password" required placeholder="Password" name="password">
 						</div>
 						<div class="p-t-30">
 							<button name="send" class="btn btn--radius btn--green" type="submit">Sign in</button>

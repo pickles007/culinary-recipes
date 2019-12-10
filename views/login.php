@@ -571,7 +571,7 @@ padding: 60px 50px;
 							<input class="input--style-2" type="text" required placeholder="Login" name="login">
 						</div>
 						<div class="input-group">
-							<input class="input--style-2" type="password" required placeholder="Password" name="password">
+							<input class="input--style-2" type="password" required  placeholder="Password" name="password">
 						</div>
 						<div class="p-t-30">
 							<button name="send" class="btn btn--radius btn--green" type="submit">Sign in</button>

@@ -22,14 +22,14 @@
 	include_once "views/sql_include.php";
     $MyData = new mysqli($host, $user, $pass, $database);
     $MyData->query("SET NAMES 'utf8'");
-    $allnews = $MyData->query("SELECT * FROM `recipe` ORDER BY `date` DESC LIMIT 16"); 
+    $allnews = $MyData->query("SELECT * FROM `recipe` ORDER BY `date` DESC LIMIT 16");
     if(isset($_SESSION["MyID"])){
         while(($row = $allnews->fetch_assoc())!=false){
             echo "<div class='col-lg-3 col-md-6 col-sm-6 single-blog'>";
             echo "<div class='thumb'><img class='img-fluid' src='".$row["photo"]."' alt=''></div>";
             echo "<p class='date'>".date("d-m-Y", strtotime($row["date"]))."</p>";
             echo "<form method='get'>";
-            echo "<input name='idRecipe' type='text' value='".$row["id"]."' style='display:none;'>";
+            echo "<input name='id' type='text' value='".$row["id"]."' style='display:none;'>";
             echo "<button type='submit' value='fullrecipe' name='action'><h4>".$row["name"]."</h4></button>";
             echo "<button type='submit' name='fav'><h4>Додати до улюблених</h4></button>";
             echo "</form>";
@@ -53,7 +53,7 @@
 
     if(isset($_GET["fav"]) && isset($_SESSION["MyID"])){
         $user_id = $_SESSION['MyID'];
-        $recipe_id = $_GET['idRecipe'];
+        $recipe_id = $_GET['id'];
         $MyData->query("INSERT INTO `favorite_recipe` (`user_id`, `recipe_id`) VALUES ('$user_id', '$recipe_id')");
     }
 

@@ -2,8 +2,8 @@
 <footer class="footer-area">
     <div class="footer-widget-wrap">
         <div class="container">
-            <div class="row section-gap">
-                <div class="col-lg-4  col-md-6 col-sm-6">
+            <div id="my" class="row section-gap">
+                <!-- <div class="col-lg-4  col-md-6 col-sm-6">
                     <div class="single-footer-widget">
                         <h4>Графік роботи</h4>
                         <ul class="hr-list">
@@ -18,10 +18,10 @@
                             </li>
                         </ul>
                     </div>
-                </div>
-                <div class="col-lg-4  col-md-6 col-sm-6">
+                </div> -->
+                <div class="col-lg-6  col-md-6 col-sm-6">
                     <div class="single-footer-widget">
-                        <h4>Зв'яжись з нами</h4>
+                        <h4>Зв'яжись з нами, в разі виникнення помилки</h4>
                         <p>
                             м.Чернівці, вул.Університетська 28, 58012
                         </p>
@@ -31,7 +31,7 @@
                         </p>
                     </div>
                 </div>
-                
+
             </div>
         </div>
     </div>

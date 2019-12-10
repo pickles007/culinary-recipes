@@ -32,7 +32,7 @@
   			<ul class="list-group list-group-flush">
     			<li class="list-group-item">
     				<form method = "get">
-						<button type='submit' name='action' class='btn btn-outline-dark' value="newrecipe">Додати новий рецепт</button>
+						<button type='submit' name='action' class='btn btn-outline-dark' value="createRecipe">Додати новий рецепт</button>
 					</form>	
 				</li>
   			</ul>

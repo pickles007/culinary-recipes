@@ -508,7 +508,7 @@ padding: 60px 50px;
             <div class="card card-2">
                 <!-- <div class="card-heading"></div> -->
                 <div class="card-body">
-                    <h2 class="title">Sigh in</h2>
+                    <h2 class="title">Реєстрація</h2>
                     <form method="POST">
                         <div class="input-group">
                             <input class="input--style-2" type="text" placeholder="Surname" name="surname">
@@ -532,7 +532,7 @@ padding: 60px 50px;
                                 <input class="input--style-2" type="password" placeholder="Repeat Password" name="password1">
                             </div>
                         <div class="p-t-30">
-                            <button class="btn btn--radius btn--green" type="submit">Register</button>
+                            <button class="btn btn--radius btn--green" type="submit">Реєстрація</button>
                         </div>
                     </form>
                 </div>

@@ -18,6 +18,93 @@
 			</section>
 			<!-- End home-about Area -->
 
+ <div class="title text-center">
+    <h1 class="mb-10">У нас ви можете</h1>
+</div>
+
+<div class="row">
+  <div class="col-sm-6">
+		<div class="card">
+  			<img class="card-img-top" src="img/about/sharerecipe.png" alt="Card image cap">
+  			<div class="card-body">
+    			<p class="card-text">Поділитись власним рецептом з людьми просто створивши його за допомогою кнопки "Додати новий рецепт"</p>
+  			</div>
+  			<ul class="list-group list-group-flush">
+    			<li class="list-group-item">
+    				<form method = "get">
+						<button type='submit' name='action' class='btn btn-outline-dark' value="createRecipe">Додати новий рецепт</button>
+					</form>
+				</li>
+  			</ul>
+  			<div class="card-body">
+    			<a href="index.php" class="card-link">На головну</a>
+  			</div>
+		</div>
+	</div>
+
+	<div class="col-sm-6">
+		<div class="card">
+  			<img class="card-img-top" src="img/about/findrecipes.png" alt="Card image cap">
+  			<div class="card-body">
+    			<p class="card-text">Здійснити пошук потрібного рецепту за категоріями.Наприклад, за кухнею.</p>
+  			</div>
+  			<ul class="list-group list-group-flush">
+    			<li class="list-group-item">
+    				<form method = "get">
+                        <input name="cuisinename" type='text' value='Російська' style='display:none;'>
+						<button type='submit' name='action' class='btn btn-outline-dark' value="bycuisine">Російська</button>
+					</form>
+    			</li>
+    			<li class="list-group-item">
+    				<form method = "get">
+                        <input name="cuisinename" type='text' value='Українська' style='display:none;'>
+						<button type='submit' name='action' class='btn btn-outline-dark' value="bycuisine">Українська</button>
+					</form>
+    			</li>
+    			<li class="list-group-item">
+    				<form method = "get">
+                        <input name="cuisinename" type='text' value='Французька' style='display:none;'>
+						<button type='submit' name='action' class='btn btn-outline-dark' value="bycuisine">Французька</button>
+					</form>
+    			</li>
+    			<li class="list-group-item">
+    				<form method = "get">
+                        <input name="cuisinename" type='text' value='Азіатська' style='display:none;'>
+						<button type='submit' name='action' class='btn btn-outline-dark' value="bycuisine">Азіатська</button>
+					</form>
+    			</li>
+  			</ul>
+  			<div class="card-body">
+    		<a href="index.php" class="card-link">На головну</a>
+  			</div>
+		</div>
+	</div>
+
+	<div class="col-sm-6">
+		<div class="card">
+  			<img class="card-img-top" src="img/about/sign.png" alt="Card image cap">
+  			<div class="card-body">
+    			<p class="card-text">Зареєстуватись чи увійти як користувач.</p>
+  			</div>
+  			<ul class="list-group list-group-flush">
+    			<li class="list-group-item">
+    				<form method = "get">
+						<button type='submit' name='action' class='btn btn-outline-dark' value="registration">Зареєстуватись</button>
+					</form>
+				</li>
+				<li class="list-group-item">
+    				<form method = "get">
+						<button type='submit' name='action' class='btn btn-outline-dark' value="login">Увійти</button>
+					</form>
+				</li>
+  			</ul>
+  			<div class="card-body">
+    			<a href="index.php" class="card-link">На головну</a>
+  			</div>
+		</div>
+	</div>
+</div>
+
 			<!-- Start review Area -->
 			<section class="review-area section-gap">
 				<div class="container">

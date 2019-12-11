@@ -537,10 +537,7 @@ if(isset($_POST["send"])){
 		if($password == $row['password']){
 			$passwordFlag = true;
 		}
-		// $MyAdm=$row["admin"];
-		// if(password_verify($password, $row['password'])){
-		//     $passwordFlag = true;
-		// }
+		
 	}
 
 	if($passwordFlag==false||$loginFlag==false){

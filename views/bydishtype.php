@@ -16,14 +16,21 @@
         INNER JOIN `dish_type` ON `recipe`.`dish_type_id`=`dish_type`.`id`
         WHERE `dish_type`.`name` = '".$dishtype."' ORDER BY `date` DESC");
     if($allrecipes->num_rows==0){
-		echo "<div class='col-lg-3 col-md-6 col-sm-6 single-blog'>
-		<h1 style='text-align:center;'>На жаль, таких рецептів у нас ще немає. Якщо ви бажаєте ви можете додати їх власноруч.</h1>
-			<form method = 'get'>
-                <button style='border: white; background: white;' type='submit' value='bydishtype' name='action'>Закуски</butston>
-            </form></div>
-			";
-		exit;
-	}
+    echo "<section class='blog-area section-gap' id='blog'>
+        <div class='container'>
+        <div class='row d-flex justify-content-center'>
+        <div class='menu-content pb-70 col-lg-8'>
+        <div class='title text-center'>
+        <p>На жаль, таких рецептів у нас ще немає. Якщо ви бажаєте ви можете додати їх власноруч.</p>
+        <form method='get'>
+        <button type='submit' name='action' class='btn btn-outline-dark' value='createRecipe'>Додати новий рецепт</button>
+        </form>
+            </div></div></div>
+            </div></section>
+        ";
+        include_once "layout/footer.php";
+    exit;
+    }
 
 ?>
 

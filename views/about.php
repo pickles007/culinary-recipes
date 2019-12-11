@@ -46,7 +46,7 @@
 		<div class="card">
   			<img class="card-img-top" src="img/about/findrecipes.png" alt="Card image cap">
   			<div class="card-body">
-    			<p class="card-text">Здійснити пошук потрібного рецепту за категоріями.Наприклад, за кухнею.</p>
+    			<p class="card-text">Здійснити пошук потрібного рецепту за категоріями. Наприклад, за кухнею.</p>
   			</div>
   			<ul class="list-group list-group-flush">
     			<li class="list-group-item">

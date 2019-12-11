@@ -1,4 +1,3 @@
-
 <style type="text/css">
     .btn{
         border: white;
@@ -9,29 +8,27 @@
 
 <!-- Start blog Area -->
 <?php
-    $cuisine = $_GET['cuisinename'];
+    $cookingtype = $_GET['cookingtype'];
     include_once "views/sql_include.php";
     $MyData = new mysqli($host, $user, $pass, $database);
     $MyData->query("SET NAMES 'utf8'");
-    $allrecipes = $MyData->query("SELECT `recipe`.`id`, `recipe`.`name`, `recipe`.`photo`, `recipe`.`cooking_desc`, `recipe`.`date`, `cuisine`.`name` FROM `recipe`
-        INNER JOIN `cuisine` ON `recipe`.`cuisine_id`=`cuisine`.`id`
-        WHERE `cuisine`.`name` = '".$cuisine."' ORDER BY `date` DESC");
+    $allrecipes = $MyData->query("SELECT `recipe`.`id`, `recipe`.`name`, `recipe`.`photo`, `recipe`.`cooking_desc`, `recipe`.`date`, `cooking_method`.`name` FROM `recipe` 
+        INNER JOIN `cooking_method` ON `recipe`.`cooking_method_id`=`cooking_method`.`id`
+        WHERE `cooking_method`.`name` = '".$cookingtype."' ORDER BY `date` DESC");
     if($allrecipes->num_rows==0){
-    echo "<section class='blog-area section-gap' id='blog'>
+		echo "<section class='blog-area section-gap' id='blog'>
         <div class='container'>
-        <div class='row d-flex justify-content-center'>
+        <div class='row d-flex justify-content-center'> 
         <div class='menu-content pb-70 col-lg-8'>
         <div class='title text-center'>
         <p>На жаль, таких рецептів у нас ще немає. Якщо ви бажаєте ви можете додати їх власноруч.</p>
-        <form method='get'>
-        <button type='submit' name='action' class='btn btn-outline-dark' value='createRecipe'>Додати новий рецепт</button>
-        </form>
+        <button type='submit' name='newrecipe' class='btn btn-outline-dark'>Додати новий рецепт</button>
             </div></div></div>
             </div></section>
-        ";
-        include_once "layout/footer.php";
-    exit;
-    }
+            ";
+            include_once "layout/footer.php";
+        exit;
+	}
 
 ?>
 
@@ -40,8 +37,7 @@
         <div class="row d-flex justify-content-center">
             <div class="menu-content pb-70 col-lg-8">
                 <div class="title text-center">
-                    <h1 class="mb-10"></h1>
-                    <p><?=$cuisine?></p>
+                    <h1 class="mb-10"><?=$cookingtype?></h1>
                 </div>
             </div>
         </div>
@@ -77,11 +73,11 @@
 		}
     }
 
-    // if(isset($_GET["fav"]) && isset($_SESSION["MyID"])){
-    //     $user_id = $_SESSION['MyID'];
-    //     $recipe_id = $_GET['idRecipe'];
-    //     $MyData->query("INSERT INTO `favorite_recipe` (`user_id`, `recipe_id`) VALUES ('$user_id', '$recipe_id')");
-    // }
+    if(isset($_GET["fav"]) && isset($_SESSION["MyID"])){
+        $user_id = $_SESSION['MyID'];
+        $recipe_id = $_GET['idRecipe'];
+        $MyData->query("INSERT INTO `favorite_recipe` (`user_id`, `recipe_id`) VALUES ('$user_id', '$recipe_id')");
+    }
 
 	$MyData->close();
 ?>
@@ -89,4 +85,5 @@
         </div>
     </div>
 </section>
+
 <!-- End blog Area -->

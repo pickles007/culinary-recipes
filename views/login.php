@@ -521,10 +521,10 @@ if(isset($_POST["send"])){
 	$resultEmail = $MyData->query("SELECT `login`, `id`, `password` FROM `users` WHERE `email` = '$login'");
 	if($resultLogin->num_rows == 0 && $resultEmail->num_rows == 0)
 	{
-		echo "Такого логіна чи E-mail адреси не зареєстровано!";
+		//echo "Такого логіна чи E-mail адреси не зареєстровано!";
 		$errorMsg="Такого логіна чи E-mail адреси не зареєстровано!";
-		include_once 'layout/footer.php';
-		exit;
+		//include_once 'layout/footer.php';
+		//exit;
 	} else {
 		$row;
 		if($resultLogin->num_rows > 0){
@@ -545,7 +545,7 @@ if(isset($_POST["send"])){
 
 	if($passwordFlag==false||$loginFlag==false){
 		$error=true;
-		$errorMsg="Неправильний логін, або пароль!";
+		$errorMsg="Неправильний логін або пароль!";
 	}
 	$MyData->close();
 
@@ -564,17 +564,17 @@ if(isset($_POST["send"])){
 		<div class="card card-2">
 			<div class="card-heading"></div>
 			<div class="card-body">
-				<h2 class="title">Sign in</h2>
+				<h2 class="title">Авторизація</h2>
 				<form method="POST">
-					<?=$errorMsg?>
+					<div style="color:red;" class="help-block with-errors"><?=$errorMsg?></div>
 					<div class="input-group">
-						<input class="input--style-2" type="text" required placeholder="Login" name="login">
+						<input class="input--style-2" type="text" required placeholder="Логін" name="login">
 					</div>
 					<div class="input-group">
-						<input class="input--style-2" type="password" required  placeholder="Password" name="password">
+						<input class="input--style-2" type="password" required  placeholder="Пароль" name="password">
 					</div>
 					<div class="p-t-30">
-						<button name="send" class="btn btn--radius btn--green" type="submit">Sign in</button>
+						<button name="send" class="btn btn--radius btn--green" type="submit">Увійти</button>
 					</div>
 				</form>
 			</div>

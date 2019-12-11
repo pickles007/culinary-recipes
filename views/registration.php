@@ -508,7 +508,6 @@ input {
 
 $wasError = false;
 $loginErr = $phoneErr = $passwordErr = $passwordErr1 = $emailErr = $surnameErr = $nameErr = "";
-
 if(isset($_POST["send"])){
     if(!empty($_POST)) {
         //   /^[a-zA-Zа-яёА-ЯЁ\s\-]+$/u
@@ -616,11 +615,12 @@ if(isset($_POST["send"])){
             <!-- <div class="card-heading"></div> -->
             <div class="card-body">
                 <h2 class="title">Реєстрація</h2>
-                <form method="POST">
+                <form method="POST" >
 
                     <div style="color:red;" class="help-block with-errors"><?=$surnameErr?></div>
                     <div class="input-group">
-                        <input required class="input--style-2" type="text" placeholder="Прізвище" name="surname">
+                        <!-- <label for="name" class="bmd-label-floating is-focused">Прізвище</label> -->
+                        <input id="name" required class="input--style-2" type="text" placeholder="Прізвище" name="surname">
                     </div>
 
                     <div style="color:red;" class="help-block with-errors"><?=$nameErr?></div>

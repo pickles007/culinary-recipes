@@ -24,6 +24,7 @@
         exit;
     }
 ?>
+<<<<<<< Updated upstream
 <script>
     function newIng() {
         let divControls = document.getElementsByClassName('controls');
@@ -50,46 +51,9 @@
         var count_html = "<label for='form_count'>К-сть *</label>s<input id='form_count' type='text' name='count' class='form-control' placeholder='Введіть к-сть *' required='required' data-error='Firstname is required.'>";
         // newEl.innerHTML = count_html;
         divForm.append(count_html);
+=======
+>>>>>>> Stashed changes
 
-
-        //      <div class="col-md-3">
-        //    <div id="ing" class="form-group">
-        // var blockItem = document.createElement('div');
-        // blockItem.setAttribute("id", id);
-        //
-        // var item = document.createElement('span');
-        // //item.className = "todo-container";
-        //
-        // var newListElem = document.createElement('input');
-        // newListElem.innerHTML = "todo-text";
-        //
-        // var check = document.createElement("input");
-        // check.setAttribute('type', 'checkbox');
-        // check.className = "todo-checkbox";
-        // check.setAttribute("onClick", "checkItem()");
-        //
-        // var del = document.createElement("button");
-        // del.innerHTML = "DELETE";
-        // del.setAttribute("onClick", "delItem("+id+")");
-        // del.className = "todo-delete";
-        //
-        // var enter = document.createElement('br');
-        //
-        // itemCount++;
-        //
-        // itemCountSpan.innerHTML = itemCount;
-        //
-        // id++;
-        // itemCountSpan.appendChild(item);
-        // blockItem.appendChild(item);
-        // blockItem.appendChild(newListElem);
-        // blockItem.appendChild(check);
-        // blockItem.appendChild(del);
-        // //blockItem.appendChild(enter);
-        //
-        // list.appendChild(blockItem);
-    }
-</script>
 
 <section class="home-about-area section-gap">
     <div class="container">
@@ -201,44 +165,6 @@
                                 </div>
                             </div>
 
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div id="ing" class="form-group">
-                                    <!-- <label for="form_ingredients">Інгредієнт *</label>
-                                    <select required  class="form-control" name="dish_type" id="form_ingredients">
-                                        <?php
-                                        // while(($row = $allingredients->fetch_assoc())!=false){
-                                        //     echo "<option value='".$row['id']."'>".$row['name']."</option><br/>";
-                                        // }
-                                        ?>
-                                    </select> -->
-                                </div>
-                            </div>
-
-                            <div class="col-md-3">
-                                <div id="unit_measure" class="form-group">
-                                    <!-- <label for="form_unit_measure">Одиниця вимірювання *</label>
-                                    <input id="form_unit_measure" type="text" name="unit_measure" class="form-control" placeholder="Введіть од. вим. *" required="required" data-error="Firstname is required."> -->
-                                </div>
-                            </div>
-
-                            <div class="col-md-3">
-                                <div id="count" class="form-group">
-                                    <!-- <label for="form_count">К-сть *</label>
-                                    <input id="form_count" type="text" name="count" class="form-control" placeholder="Введіть к-сть *" required="required" data-error="Firstname is required."> -->
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <button onClick="newIng()" type="button" name="send" class="form-control btn btn-success btn-send" value="Додати інгредієнт">Додати інгредієнт</button>
-                                </div>
-                            </div>
                         </div>
 
                         <div class="row">

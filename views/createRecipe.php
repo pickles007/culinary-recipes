@@ -14,6 +14,7 @@
         $full_photo_path = "img/photo_recipes/".$file_name;
     }
 
+    $optionErr = '';
     if(isset($_POST["send"])){
         $name=htmlspecialchars ($_POST["name"]);
         $cooking_desc=htmlspecialchars ($_POST["cooking_desc"]);
@@ -22,13 +23,19 @@
         $cooking_method_id = $_POST["cooking_method"];
         $cuisine_id = $_POST["cuisine"];
         $user_id=$_SESSION['MyID'];
-        //echo "$cooking_desc";
-        $date=date("Y-m-d H:i:s");
-        $MyData->query("INSERT INTO `recipe` (`name`, `cooking_desc`, `photo`, `date`, `dish_type_id`, `cooking_method_id`, `cuisine_id`, `user_id`) VALUES ('$name', '$cooking_desc', '$full_photo_path', '$date', '$dish_type_id', '$cooking_method_id', '$cuisine_id', '$user_id')");
+
+        if(($dish_type_id == 0) || ($cooking_method_id == 0) || ($cuisine_id == 0)) {
+            $optionErr="Не всі поля були заповнені. Повторіть спробу";
+        }else{
+            $date=date("Y-m-d H:i:s");
+            $MyData->query("INSERT INTO `recipe` (`name`, `cooking_desc`, `photo`, `date`, `dish_type_id`, `cooking_method_id`, `cuisine_id`, `user_id`) VALUES ('$name', '$cooking_desc', '$full_photo_path', '$date', '$dish_type_id', '$cooking_method_id', '$cuisine_id', '$user_id')");
+            $MyData->close();
+            include_once "views/main.php";
+            include_once "layout/footer.php";
+            exit;
+
+        }
         $MyData->close();
-        include_once "views/main.php";
-        include_once "layout/footer.php";
-        exit;
     }
 ?>
 
@@ -43,6 +50,7 @@
                 <form id="contact-form" method="post" action="" role="form" enctype="multipart/form-data">
                     <div class="messages"></div>
                     <div class="controls">
+                        <div style="color:red;" class="help-block with-errors"><?=$optionErr?></div>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -106,7 +114,7 @@
                                 <div class="form-group">
                                     <label for="form_photo">Фото *</label>
                                     <input id="form_photo" type="file" name="photo" class="form-control-file" placeholder="Виберіть інградієнти *" required="required" data-error="Valid email is required.">
-                                    <div class="help-block with-errors"><?= $file_tmp ?></div>
+                                    <div class="help-block with-errors"></div>
                                 </div>
                             </div>
 
@@ -155,9 +163,12 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-12">
-                                <input type="submit" name="send" class="btn btn-success btn-send" value="Додати">
-                            </div>
+                            <form class="" action="" method="get">
+                                <div class="col-md-12">
+                                    <input type="submit" name="send" class="btn btn-success btn-send" value="Додати">
+                                </div>
+                            </form>
+
                         </div>
                     </div>
                 </form>

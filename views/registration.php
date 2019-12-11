@@ -582,30 +582,6 @@ if(isset($_POST["send"])){
     }
 }
 
-// if(!empty($_POST)) {
-//     $surname = $_POST['surname'];
-//     $name = $_POST['name'];
-//     $email=$_POST["email"];
-//     $phone = $_POST["phone"];
-//     $login=$_POST['login'];
-//     //$pass_hash = password_hash($_POST["password"], PASSWORD_DEFAULT);
-//     $pass_hash = $_POST["password"];
-//     //$country=$_POST["country"];
-//     //---------MySQL-----------
-//     include_once "views/sql_include.php";
-//     $MyData = new mysqli($host, $user, $pass, $database);
-//     $MyData->query("SET NAMES 'utf8'");
-//     $res = $MyData->query("INSERT INTO `users` (`surname`, `name`, `email`, `phone`, `login`, `password`) VALUES ('$surname', '$name', '$email', '$phone', '$login', '$pass_hash')");
-//     $MyData->close();
-//     if($res){
-//         echo "<script>location.assign('index.php')</script>";
-//         // echo "<p class = 'done'>Ви успішно зареєструвались. <br> <a href='?action=main'>На головну.</a></p>";
-//     } else{
-//         echo "<p>ERROR REGISTRATION</p>";
-//     }
-//     include_once 'layout/footer.php';
-//     exit();
-// }
 ?>
 
 

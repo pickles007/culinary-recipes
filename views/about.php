@@ -33,7 +33,7 @@
     			<li class="list-group-item">
     				<form method = "get">
 						<button type='submit' name='action' class='btn btn-outline-dark' value="newrecipe">Додати новий рецепт</button>
-					</form>	
+					</form>
 				</li>
   			</ul>
   			<div class="card-body">
@@ -53,13 +53,13 @@
     				<form method = "get">
                         <input name="cuisinename" type='text' value='Російська' style='display:none;'>
 						<button type='submit' name='action' class='btn btn-outline-dark' value="bycuisine">Російська</button>
-					</form>	
+					</form>
     			</li>
     			<li class="list-group-item">
     				<form method = "get">
                         <input name="cuisinename" type='text' value='Українська' style='display:none;'>
 						<button type='submit' name='action' class='btn btn-outline-dark' value="bycuisine">Українська</button>
-					</form>	
+					</form>
     			</li>
     			<li class="list-group-item">
     				<form method = "get">
@@ -90,12 +90,12 @@
     			<li class="list-group-item">
     				<form method = "get">
 						<button type='submit' name='action' class='btn btn-outline-dark' value="registration">Зареєстуватись</button>
-					</form>	
+					</form>
 				</li>
 				<li class="list-group-item">
     				<form method = "get">
 						<button type='submit' name='action' class='btn btn-outline-dark' value="login">Увійти</button>
-					</form>	
+					</form>
 				</li>
   			</ul>
   			<div class="card-body">

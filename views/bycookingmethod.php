@@ -12,7 +12,7 @@
     include_once "views/sql_include.php";
     $MyData = new mysqli($host, $user, $pass, $database);
     $MyData->query("SET NAMES 'utf8'");
-    $allrecipes = $MyData->query("SELECT `recipe`.`id`, `recipe`.`name`, `recipe`.`photo`, `recipe`.`cooking_desc`, `recipe`.`date`, `cooking_method`.`name` FROM `recipe` 
+    $allrecipes = $MyData->query("SELECT `recipe`.`id`, `recipe`.`name`, `recipe`.`photo`, `recipe`.`cooking_desc`, `recipe`.`date`, `cooking_method`.`name` FROM `recipe`
         INNER JOIN `cooking_method` ON `recipe`.`cooking_method_id`=`cooking_method`.`id`
         WHERE `cooking_method`.`name` = '".$cookingtype."' ORDER BY `date` DESC");
     if($allrecipes->num_rows==0){

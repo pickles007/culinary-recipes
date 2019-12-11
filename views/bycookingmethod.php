@@ -8,13 +8,13 @@
 
 <!-- Start blog Area -->
 <?php
-    $dishtype = $_GET['dishtype'];
+    $cookingtype = $_GET['cookingtype'];
     include_once "views/sql_include.php";
     $MyData = new mysqli($host, $user, $pass, $database);
     $MyData->query("SET NAMES 'utf8'");
-    $allrecipes = $MyData->query("SELECT `recipe`.`id`, `recipe`.`name`, `recipe`.`photo`, `recipe`.`cooking_desc`, `recipe`.`date`, `dish_type`.`name` FROM `recipe`
-        INNER JOIN `dish_type` ON `recipe`.`dish_type_id`=`dish_type`.`id`
-        WHERE `dish_type`.`name` = '".$dishtype."' ORDER BY `date` DESC");
+    $allrecipes = $MyData->query("SELECT `recipe`.`id`, `recipe`.`name`, `recipe`.`photo`, `recipe`.`cooking_desc`, `recipe`.`date`, `cooking_method`.`name` FROM `recipe`
+        INNER JOIN `cooking_method` ON `recipe`.`cooking_method_id`=`cooking_method`.`id`
+        WHERE `cooking_method`.`name` = '".$cookingtype."' ORDER BY `date` DESC");
     if($allrecipes->num_rows==0){
     echo "<section class='blog-area section-gap' id='blog'>
         <div class='container'>
@@ -39,8 +39,7 @@
         <div class="row d-flex justify-content-center">
             <div class="menu-content pb-70 col-lg-8">
                 <div class="title text-center">
-                    <h1 class="mb-10"></h1>
-                    <p><?=$dishtype?></p>
+                    <h1 class="mb-10"><?=$cookingtype?></h1>
                 </div>
             </div>
         </div>
@@ -76,11 +75,11 @@
 		}
     }
 
-    // if(isset($_GET["fav"]) && isset($_SESSION["MyID"])){
-    //     $user_id = $_SESSION['MyID'];
-    //     $recipe_id = $_GET['idRecipe'];
-    //     $MyData->query("INSERT INTO `favorite_recipe` (`user_id`, `recipe_id`) VALUES ('$user_id', '$recipe_id')");
-    // }
+    if(isset($_GET["fav"]) && isset($_SESSION["MyID"])){
+        $user_id = $_SESSION['MyID'];
+        $recipe_id = $_GET['idRecipe'];
+        $MyData->query("INSERT INTO `favorite_recipe` (`user_id`, `recipe_id`) VALUES ('$user_id', '$recipe_id')");
+    }
 
 	$MyData->close();
 ?>
@@ -88,4 +87,5 @@
         </div>
     </div>
 </section>
+
 <!-- End blog Area -->

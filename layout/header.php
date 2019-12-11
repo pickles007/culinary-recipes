@@ -61,32 +61,32 @@
                                             <form method = "get">
                                                 <input name="cuisinename" type='text' value='Російська' style='display:none;'>
                                                 <!-- <a href="?cuisinename=Російська&action=bycuisine">Російська</a> -->
-                                                <button style="border: white; background: white;" type='submit' value='bycuisine' name='action'>Російська</button>
+                                                <button class="btn btn-outline-dark" type='submit' value='bycuisine' name='action'>Російська</button>
                                             </form>
                                         </li>
                                         <li>
                                             <form method = "get">
                                                 <input name="cuisinename" type='text' value='Французька' style='display:none;'>
-                                                <button style="border: white; background: white;" type='submit' value='bycuisine' name='action'>Французька</button>
+                                                <button class="btn btn-outline-dark" type='submit' value='bycuisine' name='action'>Французька</button>
                                             </form>
                                         </li>
                                         <li>
                                             <form method = "get">
                                                 <input name="cuisinename" type='text' value='Італійська' style='display:none;'>
-                                                <button style="border: white; background: white;" type='submit' value='bycuisine' name='action'>Італійська</button>
+                                                <button class="btn btn-outline-dark" type='submit' value='bycuisine' name='action'>Італійська</button>
                                             </form>
                                         </li>
                                         <li>
                                             <form method = "get">
                                                 <!-- <a href="?cuisinename=Українська&action=bycuisine">Українська</a> -->
                                                 <input name="cuisinename" type='text' value='Українська' style='display:none;'>
-                                                <button style="border: white; background: white;" type='submit' value='bycuisine' name='action'>Українська</button>
+                                                <button class="btn btn-outline-dark" type='submit' value='bycuisine' name='action'>Українська</button>
                                             </form>
                                         </li>
                                         <li>
                                             <form method = "get">
                                                 <input name="cuisinename" type='text' value='Азіатська' style='display:none;'>
-                                                <button style="border: white; background: white;" type='submit' value='bycuisine' name='action'>Азіатська</button>
+                                                <button class="btn btn-outline-dark" type='submit' value='bycuisine' name='action'>Азіатська</button>
                                             </form>
                                         </li>
                                     </ul>
@@ -97,31 +97,31 @@
                                         <li>
                                             <form method = "get">
                                                 <input name="dishtype" type='text' value='Закуски' style='display:none;'>
-                                                <button style="border: white; background: white;" type='submit' value='bydishtype' name='action'>Закуски</butston>
+                                                <button class="btn btn-outline-dark" type='submit' value='bydishtype' name='action'>Закуски</butston>
                                                 </form>
                                             </li>
                                             <li>
                                                 <form method = "get">
                                                     <input name="dishtype" type='text' value='Салати' style='display:none;'>
-                                                    <button style="border: white; background: white;" type='submit' value='bydishtype' name='action'>Салати</butston>
+                                                    <button class="btn btn-outline-dark" type='submit' value='bydishtype' name='action'>Салати</butston>
                                                     </form>
                                                 </li>
                                                 <li>
                                                     <form method = "get">
                                                         <input name="dishtype" type='text' value='Перші Страви' style='display:none;'>
-                                                        <button style="border: white; background: white;" type='submit' value='bydishtype' name='action'>Перші страви</butston>
+                                                        <button class="btn btn-outline-dark" type='submit' value='bydishtype' name='action'>Перші страви</butston>
                                                         </form>
                                                     </li>
                                                     <li>
                                                         <form method = "get">
                                                             <input name="dishtype" type='text' value='Другі Страви' style='display:none;'>
-                                                            <button style="border: white; background: white;" type='submit' value='bydishtype' name='action'>Другі страви</butston>
+                                                            <button class="btn btn-outline-dark" type='submit' value='bydishtype' name='action'>Другі страви</butston>
                                                             </form>
                                                         </li>
                                                         <li>
                                                             <form method = "get">
                                                                 <input name="dishtype" type='text' value='Десерти' style='display:none;'>
-                                                                <button style="border: white; background: white;" type='submit' value='bydishtype' name='action'>Десерти</butston>
+                                                                <button class="btn btn-outline-dark" type='submit' value='bydishtype' name='action'>Десерти</butston>
                                                                 </form>
                                                             </li>
                                                         </ul>
@@ -129,12 +129,33 @@
 
                                                     <li class="menu-has-children"><a href="">За способом приготування </a>
                                                         <ul>
-                                                            <li><a href="#">Смажені</a></li>
-                                                            <li><a href="#">Варені</a></li>
-                                                            <li><a href="#">Тушені</a></li>
-                                                            <li><a href="#">Печені</a></li>
-                                                            <li><a href="#">Різані</a></li>
-                                                        </ul>
+                                  <li>
+                                    <form method = "get">
+                                      <input name="cookingtype" type='text' value='Смажені' style='display:none;'>
+                                      <button class="btn btn-outline-dark" type='submit' value='bycookingmethod' name='action'>Смажені</button>
+                                    </form>
+                                  </li>
+                                  <li><form method = "get">
+                                      <input name="cookingtype" type='text' value='Варені' style='display:none;'>
+                                      <button class="btn btn-outline-dark" type='submit' value='bycookingmethod' name='action'>Варені</button>
+                                    </form>
+                                  </li>
+                                  <li><form method = "get">
+                                      <input name="cookingtype" type='text' value='Тушені' style='display:none;'>
+                                      <button class="btn btn-outline-dark" type='submit' value='bycookingmethod' name='action'>Тушені</button>
+                                    </form>
+                                  </li>
+                                  <li><form method = "get">
+                                      <input name="cookingtype" type='text' value='Печені' style='display:none;'>
+                                      <button class="btn btn-outline-dark" type='submit' value='bycookingmethod' name='action'>Печені</button>
+                                    </form>
+                                  </li>
+                                  <li><form method = "get">
+                                      <input name="cookingtype" type='text' value='Різані' style='display:none;'>
+                                      <button class="btn btn-outline-dark" type='submit' value='bycookingmethod' name='action'>Різані</button>
+                                    </form>
+                                  </li>
+                                </ul>
                                                     </li>
                                                 </ul>
                                             </li>

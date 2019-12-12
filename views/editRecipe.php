@@ -44,7 +44,7 @@
             $optionErr="Не всі поля були заповнені. Повторіть спробу";
         }else{
             $date=date("Y-m-d H:i:s");
-            
+
             $MyData->query("UPDATE `recipe` SET `name` = '$name', `cooking_desc` = '$cooking_desc', `photo` = '$full_photo_path',  `dish_type_id` = '$dish_type_id', `cooking_method_id` = '$cooking_method_id', `cuisine_id` = '$cuisine_id' WHERE `id` = '$idRecipe'");
             $MyData->close();
             include_once "views/main.php";
@@ -54,13 +54,6 @@
         }
         $MyData->close();
 
-        // $MyData->query("UPDATE `site_news` SET `visible` = '$checked1' WHERE `site_news`.`news_id` = '$MyID1'");
-        // $MyData->query("UPDATE `site_news` SET `title` = '$title' WHERE `site_news`.`news_id` = '$MyID1'");
-        // $MyData->query("UPDATE `site_news` SET `main_text` = '$news' WHERE `site_news`.`news_id` = '$MyID1'");
-        // $MyData->close();
-        // include_once "views/main.php";
-        // include_once "layout/footer.php";
-        // exit;
     }
 
 	$MyData->close();

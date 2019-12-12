@@ -31,42 +31,38 @@ if(isset($_POST["send"])){
     }else{
         if(!empty($_POST["old_password"]) ){
             if(!empty($_POST["new_password"]) || !empty($_POST["new_password1"])){
-    // if(!empty($_POST["old_password"]) || !empty($_POST["new_password"]) || !empty($_POST["new_password1"])){
-            if($_POST["old_password"] == $password ){
-                if($_POST["new_password"] == $_POST["new_password1"]){
-                    $new_password = $_POST["new_password"];
-                }else{
-                    $errorNewPassword = "Паролі не співпадають!";
+                // if(!empty($_POST["old_password"]) || !empty($_POST["new_password"]) || !empty($_POST["new_password1"])){
+                if($_POST["old_password"] == $password ){
+                    if($_POST["new_password"] == $_POST["new_password1"]){
+                        $new_password = $_POST["new_password"];
+                    }else{
+                        $errorNewPassword = "Паролі не співпадають!";
+                        // exit;
+                    }
+
+                } else{
+                    $errorOldPassword = "Старий пароль невірний!";
                     // exit;
                 }
-
-            } else{
-                $errorOldPassword = "Старий пароль невірний!";
-                // exit;
+            }else{
+                $errorNewPassword = "Паролі не співпадають!";
             }
         }else{
-            $errorNewPassword = "Паролі не співпадають!";
+            $errorOldPassword = "Старий пароль невірний!";
         }
-    }else{
-        $errorOldPassword = "Старий пароль невірний!";
     }
-}
 
-// }
+    // }
 
-$post_name=$_POST["name"];
-$post_surname=$_POST["surname"];
-$post_login=$_POST["login"];
-$post_email=$_POST["email"];
-$post_phone=$_POST["phone"];
-$post_password=$_POST["password"];
+    $post_name=$_POST["name"];
+    $post_surname=$_POST["surname"];
+    $post_login=$_POST["login"];
+    $post_email=$_POST["email"];
+    $post_phone=$_POST["phone"];
+    $post_password=$_POST["password"];
 
-$MyData->query("UPDATE `users` SET `name` = '$post_name', `surname` = '$post_surname', `login` = '$post_login', `email` = '$post_email', `phone` = '$post_phone', `password` = '$new_password' WHERE `users`.`id` = '$id'");
-// echo "<script>location.assign('views/myAccount.php')</script>";
-include_once "views/myAccount.php";
-// include_once "layout/footer.php";
-//exit;
-
+    $MyData->query("UPDATE `users` SET `name` = '$post_name', `surname` = '$post_surname', `login` = '$post_login', `email` = '$post_email', `phone` = '$post_phone', `password` = '$new_password' WHERE `users`.`id` = '$id'");
+    echo "<script>location.assign('?action=myAccount')</script>";
 }
 $MyData->close();
 ?>

@@ -555,6 +555,25 @@ if(isset($_POST["send"])){
         }
 
 
+        include_once "views/sql_include.php";
+        $MyData = new mysqli($host, $user, $pass, $database);
+		$MyData->query("SET NAMES 'utf8'");
+        $check_Login = $MyData->query("SELECT `login` FROM `users`");
+		while(($row = $check_Login->fetch_assoc())!=false){
+			if($row["login"]==$_POST["login"]){
+				$loginErr="Користувач з таким логіном вже існує!";
+				$wasError=true;
+			}
+		}
+		$check_Email = $MyData->query("SELECT `email` FROM `users`");
+		while(($row = $check_Email->fetch_assoc())!=false){
+			if($row["email"]==$_POST["email"]){
+				$emailErr="Ця e-mail адреса вже зареєстрована!";
+				$wasError=true;
+			}
+		}
+        $MyData->close();
+
         if ($wasError == false){
             $surname = $_POST['surname'];
             $name = $_POST['name'];

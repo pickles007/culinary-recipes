@@ -33,24 +33,25 @@
             echo "<form method='get'>";
             echo "<input name='id' type='text' value='".$row["id"]."' style='display:none;'>";
             echo "<button type='submit' value='fullrecipe' name='action'><h4>".$row["name"]."</h4></button>";
-            echo "<button type='submit' name='fav'><h4>Додати до улюблених</h4></button>";
+            //echo "<button type='submit' name='fav'><h4>Додати до улюблених</h4></button>";
             echo "</form>";
             echo "<p>".mb_strimwidth($row["cooking_desc"], 0, 45, "...")."</p>";
             echo "</div>";
         }
-    } else {
-        while(($row = $allnews->fetch_assoc())!=false){
-            echo "<div class='col-lg-3 col-md-6 col-sm-6 single-blog'>";
-            echo "<div class='thumb'><img class='img-fluid' src='".$row["photo"]."' alt=''></div>";
-			echo "<p class='date'>".date("d-m-Y", strtotime($row["date"]))."</p>";
-            echo "<form method='get'>";
-            echo "<input name='id' type='text' value='".$row["id"]."' style='display:none;'>";
-			echo "<button type='submit' value='fullrecipe' name='action'><h4>".$row["name"]."</h4></button>";
-            echo "</form>";
-			echo "<p>".mb_strimwidth($row["cooking_desc"], 0, 45, "...")."</p>";
-            echo "</div>";
-		}
     }
+    //  else {
+    //     while(($row = $allnews->fetch_assoc())!=false){
+    //         echo "<div class='col-lg-3 col-md-6 col-sm-6 single-blog'>";
+    //         echo "<div class='thumb'><img class='img-fluid' src='".$row["photo"]."' alt=''></div>";
+	// 		echo "<p class='date'>".date("d-m-Y", strtotime($row["date"]))."</p>";
+    //         echo "<form method='get'>";
+    //         echo "<input name='id' type='text' value='".$row["id"]."' style='display:none;'>";
+	// 		echo "<button type='submit' value='fullrecipe' name='action'><h4>".$row["name"]."</h4></button>";
+    //         echo "</form>";
+	// 		echo "<p>".mb_strimwidth($row["cooking_desc"], 0, 45, "...")."</p>";
+    //         echo "</div>";
+	// 	}
+    // }
     //
     // if(isset($_GET["fav"]) && isset($_SESSION["MyID"])){
     //     $user_id = $_SESSION['MyID'];

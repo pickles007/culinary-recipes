@@ -31,9 +31,22 @@
   			</div>
   			<ul class="list-group list-group-flush">
     			<li class="list-group-item">
+					<?php
+						if(isset($_SESSION["MyID"])){
+					?>
     				<form method = "get">
 						<button type='submit' name='action' class='btn btn-outline-dark' value="newrecipe">Додати новий рецепт</button>
 					</form>
+					<?php
+						} else {
+					?>
+					<div class="card-body">
+						<p class="card-text">Зареєструйтесь та увійдіть, щоб додати свій рецепт на сайт.</p>
+					</div>
+					<?php
+						}
+					?>
+
 				</li>
   			</ul>
   			<div class="card-body">
@@ -80,6 +93,9 @@
 		</div>
 	</div>
 
+<?php
+	if(!isset($_SESSION["MyID"])){
+?>
 	<div class="col-sm-6">
 		<div class="card">
   			<img class="card-img-top" src="img/about/sign.png" alt="Card image cap">
@@ -103,6 +119,10 @@
   			</div>
 		</div>
 	</div>
+	<?php
+		}
+	?>
+
 </div>
 
 			<!-- Start review Area -->

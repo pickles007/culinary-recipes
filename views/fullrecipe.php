@@ -52,7 +52,43 @@
 						</div>
 						<div class="col-lg-6 home-about-right">
 							<img class="img-fluid" src="<?=$photo?>" alt="">
-						</div>
+						</div>	
 					</div>
+
+					<?php
+						$MyData = new mysqli($host, $user, $pass, $database);
+						$MyData->query("SET NAMES 'utf8'");
+						$MyData->query("SET NAMES 'utf8'");
+						$recipes = $MyData->query("SELECT `recipe`.`id`, `favorite_recipe`.`recipe_id` FROM `recipe`
+							INNER JOIN `favorite_recipe` ON `recipe`.`id` = `favorite_recipe`.`recipe_id`
+							WHERE `favorite_recipe`.`recipe_id` = ".$id);
+						if($recipes->num_rows==0){
+							echo "
+							<div class='col-md-24'>
+								<form method = 'get'>
+									<input name='id' type='text' value='".$id."' style='display:none;'>
+									<button type='submit' name='fav' class='btn btn-outline-danger'>Додати до улюблених</button>
+								</form>
+							</div>";
+						}
+						else{
+							echo "
+							<div class='col-md-24'>
+								<form method = 'get'>
+									<input name='id' type='text' value='<?=$id?>' style='display:none;'>
+									<button type='submit' name='fav' class='btn btn-outline-danger'>Видалити з улюблених</button>
+								</form>
+							</div>";
+						}
+
+						if(isset($_GET["fav"]) && isset($_SESSION["MyID"])){
+        					$user_id = $_SESSION['MyID'];
+        					$recipe_id = $_GET['id'];
+        					$MyData->query("INSERT INTO `favorite_recipe` (`user_id`, `recipe_id`) VALUES ('$user_id', '$recipe_id')");
+   						}
+
+						$MyData->close();
+					?>
+
 				</div>
 			</section>

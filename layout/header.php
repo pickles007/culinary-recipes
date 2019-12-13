@@ -59,34 +59,27 @@
                                     <ul class="nav-menu">
                                         <li>
                                             <form method = "get">
-                                                <input name="cuisinename" type='text' value='Російська' style='display:none;'>
-                                                <!-- <a href="?cuisinename=Російська&action=bycuisine">Російська</a> -->
-                                                <button class="btn btn-outline-dark" type='submit' value='bycuisine' name='action'>Російська</button>
+                                                <a href="?cuisinename=Російська&action=bycuisine" name="action" value="Російська">Російська</a>
                                             </form>
                                         </li>
                                         <li>
                                             <form method = "get">
-                                                <input name="cuisinename" type='text' value='Французька' style='display:none;'>
-                                                <button class="btn btn-outline-dark" type='submit' value='bycuisine' name='action'>Французька</button>
+                                                <a href="?cuisinename=Французька&action=bycuisine" name="action" value="Французька">Французька</a>
                                             </form>
                                         </li>
                                         <li>
                                             <form method = "get">
-                                                <input name="cuisinename" type='text' value='Італійська' style='display:none;'>
-                                                <button class="btn btn-outline-dark" type='submit' value='bycuisine' name='action'>Італійська</button>
+                                                <a href="?cuisinename=Італійська&action=bycuisine" name="action" value="Італійська">Італійська</a>
                                             </form>
                                         </li>
                                         <li>
                                             <form method = "get">
-                                                <!-- <a href="?cuisinename=Українська&action=bycuisine">Українська</a> -->
-                                                <input name="cuisinename" type='text' value='Українська' style='display:none;'>
-                                                <button class="btn btn-outline-dark" type='submit' value='bycuisine' name='action'>Українська</button>
+                                                <a href="?cuisinename=Українська&action=bycuisine" name="action" value="Українська">Українська</a>
                                             </form>
                                         </li>
                                         <li>
                                             <form method = "get">
-                                                <input name="cuisinename" type='text' value='Азіатська' style='display:none;'>
-                                                <button class="btn btn-outline-dark" type='submit' value='bycuisine' name='action'>Азіатська</button>
+                                                <a href="?cuisinename=Азіатська&action=bycuisine" name="action" value="Азіатська">Азіатська</a>
                                             </form>
                                         </li>
                                     </ul>
@@ -96,32 +89,27 @@
                                     <ul>
                                         <li>
                                             <form method = "get">
-                                                <input name="dishtype" type='text' value='Закуски' style='display:none;'>
-                                                <button class="btn btn-outline-dark" type='submit' value='bydishtype' name='action'>Закуски</butston>
+                                                    <a href="?dishtype=Закуски&action=bydishtype" name="action" value="Закуски">Закуски</a>
                                                 </form>
                                             </li>
                                             <li>
                                                 <form method = "get">
-                                                    <input name="dishtype" type='text' value='Салати' style='display:none;'>
-                                                    <button class="btn btn-outline-dark" type='submit' value='bydishtype' name='action'>Салати</butston>
+                                                        <a href="?dishtype=Салати&action=bydishtype" name="action" value="Салати">Салати</a>
                                                     </form>
                                                 </li>
                                                 <li>
                                                     <form method = "get">
-                                                        <input name="dishtype" type='text' value='Перші Страви' style='display:none;'>
-                                                        <button class="btn btn-outline-dark" type='submit' value='bydishtype' name='action'>Перші страви</butston>
+                                                            <a href="?dishtype=Перші страви&action=bydishtype" name="action" value="Перші страви">Перші страви</a>
                                                         </form>
                                                     </li>
                                                     <li>
                                                         <form method = "get">
-                                                            <input name="dishtype" type='text' value='Другі Страви' style='display:none;'>
-                                                            <button class="btn btn-outline-dark" type='submit' value='bydishtype' name='action'>Другі страви</butston>
+                                                                <a href="?dishtype=Другі Страви&action=bydishtype" name="action" value="Другі Страви">Другі Страви</a>   
                                                             </form>
                                                         </li>
                                                         <li>
                                                             <form method = "get">
-                                                                <input name="dishtype" type='text' value='Десерти' style='display:none;'>
-                                                                <button class="btn btn-outline-dark" type='submit' value='bydishtype' name='action'>Десерти</butston>
+                                                                    <a href="?dishtype=Десерти&action=bydishtype" name="action" value="Десерти">Десерти</a>
                                                                 </form>
                                                             </li>
                                                         </ul>
@@ -131,28 +119,23 @@
                                                         <ul>
                                   <li>
                                     <form method = "get">
-                                      <input name="cookingtype" type='text' value='Смажені' style='display:none;'>
-                                      <button class="btn btn-outline-dark" type='submit' value='bycookingmethod' name='action'>Смажені</button>
+                                      <a href="?cookingtype=Смажені&action=bycookingmethod" name="cookingtype" value="Смажені">Смажені</a>
                                     </form>
                                   </li>
                                   <li><form method = "get">
-                                      <input name="cookingtype" type='text' value='Варені' style='display:none;'>
-                                      <button class="btn btn-outline-dark" type='submit' value='bycookingmethod' name='action'>Варені</button>
+                                      <a href="?cookingtype=Варені&action=bycookingmethod" name="cookingtype" value="Варені">Варені</a>
                                     </form>
                                   </li>
                                   <li><form method = "get">
-                                      <input name="cookingtype" type='text' value='Тушені' style='display:none;'>
-                                      <button class="btn btn-outline-dark" type='submit' value='bycookingmethod' name='action'>Тушені</button>
+                                      <a href="?cookingtype=Тушені&action=bycookingmethod" name="cookingtype" value="Тушені">Тушені</a>
                                     </form>
                                   </li>
                                   <li><form method = "get">
-                                      <input name="cookingtype" type='text' value='Печені' style='display:none;'>
-                                      <button class="btn btn-outline-dark" type='submit' value='bycookingmethod' name='action'>Печені</button>
+                                      <a href="?cookingtype=Печені&action=bycookingmethod" name="cookingtype" value="Печені">Печені</a>
                                     </form>
                                   </li>
                                   <li><form method = "get">
-                                      <input name="cookingtype" type='text' value='Різані' style='display:none;'>
-                                      <button class="btn btn-outline-dark" type='submit' value='bycookingmethod' name='action'>Різані</button>
+                                      <a href="?cookingtype=Різані&action=bycookingmethod" name="cookingtype" value="Різані">Різані</a>
                                     </form>
                                   </li>
                                 </ul>

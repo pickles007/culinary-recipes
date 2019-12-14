@@ -34,12 +34,12 @@ if(isset($_POST["send"])){
 
     if(!empty($_POST)) {
         //   /^[a-zA-Zа-яёА-ЯЁ\s\-]+$/u
-        if(!preg_match("/^[a-zA-Zа-яА-Я\s\-]+$/u", $_POST["surname"])) {
+        if(!preg_match("/^[a-zа-я\d]{1}[a-zа-я\d\s]*[a-zа-я\d]{1}$/i", $_POST["surname"])) {
             $surnameErr ="Тільки літери!";
             $wasError = true;
         }
 
-        if(!preg_match("/^[a-zA-Zа-яА-Я\s\-]+$/u", $_POST["name"])) {
+        if(!preg_match("/^[a-zа-я\d]{1}[a-zа-я\d\s]*[a-zа-я\d]{1}$/i", $_POST["name"])) {
             $nameErr ="Тільки літери!";
             $wasError = true;
         }
@@ -99,7 +99,7 @@ if(isset($_POST["send"])){
             $post_email=$_POST["email"];
             $post_phone=$_POST["phone"];
             $post_password=$_POST["password"];
-            
+
             $MyData->query("UPDATE `users` SET `name` = '$post_name', `surname` = '$post_surname', `login` = '$post_login', `email` = '$post_email', `phone` = '$post_phone', `password` = '$new_password' WHERE `users`.`id` = '$id'");
             echo "<script>location.assign('?action=myAccount')</script>";
 

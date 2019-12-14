@@ -16,18 +16,42 @@
         INNER JOIN `cooking_method` ON `recipe`.`cooking_method_id`=`cooking_method`.`id`
         WHERE `cooking_method`.`name` = '".$cookingtype."' ORDER BY `date` DESC");
     if($allrecipes->num_rows==0){
-    echo "<section class='blog-area section-gap' id='blog'>
-        <div class='container'>
-        <div class='row d-flex justify-content-center'>
-        <div class='menu-content pb-70 col-lg-8'>
-        <div class='title text-center'>
-        <p>На жаль, таких рецептів у нас ще немає. Якщо ви бажаєте ви можете додати їх власноруч.</p>
-        <form method='get'>
-        <button type='submit' name='action' value='createRecipe' class='btn btn-outline-dark'>Додати новий рецепт</button>
-        </form>
-            </div></div></div>
-            </div></section>
-        ";
+
+
+        if(isset($_SESSION["MyID"])){
+
+            echo "<section class='blog-area section-gap' id='blog'>
+                <div class='container'>
+                <div class='row d-flex justify-content-center'>
+                <div class='menu-content pb-70 col-lg-8'>
+                <div class='title text-center'>
+                <p>На жаль, таких рецептів у нас ще немає. Якщо ви бажаєте ви можете додати їх власноруч.</p>
+                <form method='get'>
+                <button type='submit' name='action' value='createRecipe' class='btn btn-outline-dark'>Додати новий рецепт</button>
+                </form>
+                    </div></div></div>
+                    </div></section>
+                ";
+
+        } else {
+
+            echo "<section class='blog-area section-gap' id='blog'>
+                <div class='container'>
+                <div class='row d-flex justify-content-center'>
+                <div class='menu-content pb-70 col-lg-8'>
+                <div class='title text-center'>
+                <p>На жаль, таких рецептів у нас ще немає. Якщо ви бажаєте ви можете додати їх власноруч.</p>
+                <p>Зареєструйтесь та увійдіть, щоб додати свій рецепт на сайт.</p>
+                    </div></div></div>
+                    </div></section>
+                ";
+
+        }
+
+
+
+
+
         include_once "layout/footer.php";
     exit;
     }

@@ -511,13 +511,13 @@ $loginErr = $phoneErr = $passwordErr = $passwordErr1 = $emailErr = $surnameErr =
 if(isset($_POST["send"])){
     if(!empty($_POST)) {
         //   /^[a-zA-Zа-яёА-ЯЁ\s\-]+$/u
-        if(!preg_match("/^[a-zA-Zа-яА-Я\s\-]+$/u", $_POST["surname"])) {
+        if(!preg_match("/^[a-zа-я\d]{1}[a-zа-я\d\s]*[a-zа-я\d]{1}$/i", $_POST["surname"])) {
             $surnameErr ="Тільки літери!";
             $wasError = true;
         }
 
 
-        if(!preg_match("/^[a-zA-Zа-яА-Я\s\-]+$/u", $_POST["name"])) {
+        if(!preg_match("/^[a-zа-я\d]{1}[a-zа-я\d\s]*[a-zа-я\d]{1}$/i", $_POST["name"])) {
             $nameErr ="Тільки літери!";
             $wasError = true;
         }
@@ -552,6 +552,25 @@ if(isset($_POST["send"])){
             $passwordErr1="Паролі не співпадають.";
             $wasError = true;
         }
+
+        include_once "views/sql_include.php";
+        $MyData = new mysqli($host, $user, $pass, $database);
+        $MyData->query("SET NAMES 'utf8'");
+        $check_Login = $MyData->query("SELECT login FROM users");
+        while(($row = $check_Login->fetch_assoc())!=false){
+            if($row["login"]==$_POST["login"]){
+                $loginErr="Користувач з таким логіном вже існує!";
+                $wasError=true;
+            }
+        }
+        $check_Email = $MyData->query("SELECT email FROM users");
+        while(($row = $check_Email->fetch_assoc())!=false){
+            if($row["email"]==$_POST["email"]){
+                $emailErr="Ця e-mail адреса вже зареєстрована!";
+                $wasError=true;
+            }
+        }
+        $MyData->close();
 
 
         if ($wasError == false){

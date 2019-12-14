@@ -25,44 +25,86 @@ $password=$row["password"];
 $errorNewPassword = '';
 $errorOldPassword = '';
 $new_password = '';
+
+$wasError = false;
+$loginErr = $phoneErr = $passwordErr = $passwordErr1 = $emailErr = $surnameErr = $nameErr = "";
+
 if(isset($_POST["send"])){
-    if(empty($_POST["old_password"]) && empty($_POST["new_password"]) && empty($_POST["new_password1"])){
-        $new_password = $row["password"];
-    }else{
-        if(!empty($_POST["old_password"]) ){
-            if(!empty($_POST["new_password"]) || !empty($_POST["new_password1"])){
-                // if(!empty($_POST["old_password"]) || !empty($_POST["new_password"]) || !empty($_POST["new_password1"])){
-                if($_POST["old_password"] == $password ){
-                    if($_POST["new_password"] == $_POST["new_password1"]){
-                        $new_password = $_POST["new_password"];
+
+
+    if(!empty($_POST)) {
+        //   /^[a-zA-Zа-яёА-ЯЁ\s\-]+$/u
+        if(!preg_match("/^[a-zа-я\d]{1}[a-zа-я\d\s]*[a-zа-я\d]{1}$/i", $_POST["surname"])) {
+            $surnameErr ="Тільки літери!";
+            $wasError = true;
+        }
+
+        if(!preg_match("/^[a-zа-я\d]{1}[a-zа-я\d\s]*[a-zа-я\d]{1}$/i", $_POST["name"])) {
+            $nameErr ="Тільки літери!";
+            $wasError = true;
+        }
+
+        if(!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
+            $emailErr="Некоректно введено email";
+            $wasError = true;
+        }
+
+        if(!preg_match("/^\+380\d{3}\d{2}\d{2}\d{2}$/", $_POST["phone"])) {
+            $phoneErr ="Тільки цифри, починати з +380";
+            $wasError = true;
+        }
+
+        if(!preg_match("/^[-_0-9a-zA-Zа-яА-Я]{4,}$/", $_POST["login"])) {
+            $loginErr ="Не менше 4 літер, може містити лише латинські та кириличні літери (великі та малі), цифри, нижнє підкреслення та дефіс";
+            $wasError = true;
+        }
+
+
+        if ($wasError == false){
+            if(empty($_POST["old_password"]) && empty($_POST["new_password"]) && empty($_POST["new_password1"])){
+                $new_password = $row["password"];
+            }else{
+                if(!empty($_POST["old_password"]) ){
+                    if(!empty($_POST["new_password"]) || !empty($_POST["new_password1"])){
+                        // if(!empty($_POST["old_password"]) || !empty($_POST["new_password"]) || !empty($_POST["new_password1"])){
+                        if($_POST["old_password"] == $password ){
+                            if( preg_match("/^((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{7,})$/", $_POST["new_password"]) && $_POST["new_password"] == $_POST["new_password1"]){
+                                $new_password = $_POST["new_password"];
+                            }else{
+                                $errorNewPassword = "Паролі не співпадають!";
+                                $new_password = $row["password"];
+                                // exit;
+                            }
+
+                        } else{
+                            $errorOldPassword = "Старий пароль невірний!";
+                            $new_password = $row["password"];
+                            // exit;
+                        }
                     }else{
                         $errorNewPassword = "Паролі не співпадають!";
-                        // exit;
+                        $new_password = $row["password"];
                     }
-
-                } else{
+                }else{
                     $errorOldPassword = "Старий пароль невірний!";
-                    // exit;
+                    $new_password = $row["password"];
                 }
-            }else{
-                $errorNewPassword = "Паролі не співпадають!";
             }
-        }else{
-            $errorOldPassword = "Старий пароль невірний!";
+
+            // }
+
+            $post_name=$_POST["name"];
+            $post_surname=$_POST["surname"];
+            $post_login=$_POST["login"];
+            $post_email=$_POST["email"];
+            $post_phone=$_POST["phone"];
+            $post_password=$_POST["password"];
+
+            $MyData->query("UPDATE `users` SET `name` = '$post_name', `surname` = '$post_surname', `login` = '$post_login', `email` = '$post_email', `phone` = '$post_phone', `password` = '$new_password' WHERE `users`.`id` = '$id'");
+            echo "<script>location.assign('?action=myAccount')</script>";
+
         }
     }
-
-    // }
-
-    $post_name=$_POST["name"];
-    $post_surname=$_POST["surname"];
-    $post_login=$_POST["login"];
-    $post_email=$_POST["email"];
-    $post_phone=$_POST["phone"];
-    $post_password=$_POST["password"];
-
-    $MyData->query("UPDATE `users` SET `name` = '$post_name', `surname` = '$post_surname', `login` = '$post_login', `email` = '$post_email', `phone` = '$post_phone', `password` = '$new_password' WHERE `users`.`id` = '$id'");
-    echo "<script>location.assign('?action=myAccount')</script>";
 }
 $MyData->close();
 ?>
@@ -79,13 +121,14 @@ $MyData->close();
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
+                                    <div style="color:red;" class="help-block with-errors"><?=$nameErr?></div>
                                     <label for="form_name">Ім`я</label>
                                     <input id="form_name" type="text" name="name" class="form-control" placeholder="Введіть ім`я" required="required" data-error="Firstname is required." value="<?=$name?>">
-                                    <div class="help-block with-errors"></div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
+                                    <div style="color:red;" class="help-block with-errors"><?=$surnameErr?></div>
                                     <label for="form_name">Прізвище</label>
                                     <input id="form_name" type="text" name="surname" class="form-control" placeholder="Введіть прізвище" required="required" data-error="Lastname is required." value="<?=$surname?>">
                                     <div  class="help-block with-errors"></div>
@@ -96,6 +139,7 @@ $MyData->close();
                         <div class="row">
                             <div class="col-md-9">
                                 <div class="form-group">
+                                    <div style="color:red;" class="help-block with-errors"><?=$loginErr?></div>
                                     <label for="form_name">Логін</label>
                                     <input id="form_name" type="text" name="login" class="form-control" placeholder="Введіть логін" required="required" data-error="Login is required." value="<?=$login?>">
                                     <div class="help-block with-errors"></div>
@@ -106,6 +150,7 @@ $MyData->close();
                         <div class="row">
                             <div class="col-md-9">
                                 <div class="form-group">
+                                    <div style="color:red;" class="help-block with-errors"><?=$emailErr?></div>
                                     <label for="form_name">Електронна пошта</label>
                                     <input id="form_name" type="email" name="email" class="form-control" placeholder="Введіть e-mail" required="required" data-error="E-mail is required." value="<?=$email?>">
                                     <div class="help-block with-errors"></div>
@@ -116,6 +161,7 @@ $MyData->close();
                         <div class="row">
                             <div class="col-md-9">
                                 <div class="form-group">
+                                    <div style="color:red;" class="help-block with-errors"><?=$phoneErr?></div>
                                     <label for="form_photo">Телефон</label>
                                     <input id="form_photo" type="text" name="phone" class="form-control" placeholder="Введіть номер телефону" required="required" data-error="Phone is required." value="<?=$phone?>">
                                     <div class="help-block with-errors"></div>
@@ -148,7 +194,7 @@ $MyData->close();
                                 <div class="form-group">
                                     <label for="form_photo"> Повторіть новий пароль</label>
                                     <input id="form_photo" type="password" name="new_password1" class="form-control" placeholder="Повторіть новий пароль"  data-error="Phone is required.">
-                                    <div class="help-block with-errors"></div>
+                                    <div style="color:red; font-size:16px;" class="help-block with-errors"><?=$errorOldPassword?></div>
                                 </div>
                             </div>
                         </div>

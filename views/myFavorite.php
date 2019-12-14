@@ -17,11 +17,11 @@
         </div>
         <div class="row">
 
-<?php        
+<?php
 
     if(isset($_SESSION["MyID"])){
 	    include_once "views/sql_include.php";
-        $user_id = $_SESSION["MyID"]; 
+        $user_id = $_SESSION["MyID"];
         $MyData = new mysqli($host, $user, $pass, $database);
         $MyData->query("SET NAMES 'utf8'");
         $allnews = $MyData->query("SELECT * FROM `recipe`, `favorite_recipe` WHERE `favorite_recipe`.`user_id` = '$user_id'  and `favorite_recipe`.`recipe_id` = `recipe`.`id`  ORDER BY `recipe`.`date` DESC");
@@ -35,7 +35,7 @@
             echo "<form method='get'>";
             echo "<input name='id' type='text' value='".$row["id"]."' style='display:none;'>";
             echo "<button type='submit' value='fullrecipe' name='action'><h4>".$row["name"]."</h4></button>";
-            echo "<button type='submit' name='fav'><h4>Видалити з улюблених</h4></button>";
+            echo "<button type='submit' name='del'><h4>Видалити з улюблених</h4></button>";
             echo "</form>";
             echo "<p>".mb_strimwidth($row["cooking_desc"], 0, 45, "...")."</p>";
             echo "</div>";

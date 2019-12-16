@@ -68,7 +68,7 @@ $allrecipes = $MyData->query("SELECT `recipe`.`id`, `recipe`.`name`, `recipe`.`c
 							if($recipes->num_rows==0){
 								echo "
 								<div class='col-md-24'>
-								<form method = 'get'>
+								<form method = 'post'>
 								<input name='id' type='text' value='".$id."' style='display:none;'>
 								<button type='submit' name='fav'  class='btn btn-outline-danger'>Додати до улюблених</button>
 								</form>
@@ -85,11 +85,11 @@ $allrecipes = $MyData->query("SELECT `recipe`.`id`, `recipe`.`name`, `recipe`.`c
 
 						}
 					}
-					if(isset($_GET["fav"]) && isset($_SESSION["MyID"])){
+					if(isset($_POST["fav"]) && isset($_SESSION["MyID"])){
 						$user_id = $_SESSION['MyID'];
-						$recipe_id = $_GET['id'];
+						$recipe_id = $_POST['id'];
 						$MyData->query("INSERT INTO `favorite_recipe` (`user_id`, `recipe_id`) VALUES ('$user_id', '$recipe_id')");
-						//echo "<script>location.assign('?action=myFavorite')</script>";
+						echo "<script>location.assign('?action=myFavorite')</script>";
 					}
 
 
@@ -97,7 +97,7 @@ $allrecipes = $MyData->query("SELECT `recipe`.`id`, `recipe`.`name`, `recipe`.`c
 						$user_id = $_SESSION['MyID'];
 						//$recipe_id = $_GET['id'];
 						$res = $MyData->query("DELETE FROM `favorite_recipe` WHERE `user_id` = '$user_id' AND `recipe_id` = '$id'");
-						//echo "<script>location.assign('?action=myFavorite')</script>";
+						echo "<script>location.assign('?action=myFavorite')</script>";
 					}
 
 

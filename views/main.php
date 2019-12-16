@@ -31,12 +31,11 @@
             echo "<form method='get'>";
             echo "<input name='id' type='text' value='".$row["id"]."' style='display:none;'>";
             echo "<button type='submit' value='fullrecipe' name='action'><h4>".$row["name"]."</h4></button>";
-            echo "<button type='submit' name='fav'><h4>Додати до улюблених</h4></button>";
             echo "</form>";
             echo "<p>".mb_strimwidth($row["cooking_desc"], 0, 45, "...")."</p>";
-            //echo "<button type='submit' name='fullrecipe' value='".$row["id"]."'><h4>Додати до улюблених</h4></button>";
             echo "</div>";
         }
+
     } else {
         while(($row = $allnews->fetch_assoc())!=false){
             echo "<div class='col-lg-3 col-md-6 col-sm-6 single-blog'>";
@@ -56,6 +55,7 @@
     //     $recipe_id = $_GET['id'];
     //     $MyData->query("INSERT INTO `favorite_recipe` (`user_id`, `recipe_id`) VALUES ('$user_id', '$recipe_id')");
     // }
+
 
 	$MyData->close();
 ?>

@@ -1,24 +1,62 @@
 <?php
-    include_once "views/sql_include.php";
-    $MyData = new mysqli($host, $user, $pass, $database);
-    $MyData->query("SET NAMES 'utf8'");
-    $allcuisine = $MyData->query("SELECT * from `cuisine`");
-    $allcookingmethod = $MyData->query("SELECT * from `cooking_method`");
-    $alldishtype = $MyData->query("SELECT * from `dish_type`");
-    $allingredients = $MyData->query("SELECT * from `ingredient`");
-    $file_tmp = '';
+include_once "views/sql_include.php";
+$MyData = new mysqli($host, $user, $pass, $database);
+$MyData->query("SET NAMES 'utf8'");
+$allcuisine = $MyData->query("SELECT * from `cuisine`");
+$allcookingmethod = $MyData->query("SELECT * from `cooking_method`");
+$alldishtype = $MyData->query("SELECT * from `dish_type`");
+$allingredients = $MyData->query("SELECT * from `ingredient`");
+$full_photo_path = $file_name = $file_tmp = '';
+$wasError = false;
+$photoErr = $nameErr = "";
+// $type = '';
+
+$optionErr = '';
+if(isset($_POST["send"])){
+
     if(isset($_FILES['photo'])){
         $file_name = $_FILES['photo']['name'];
         $file_tmp = $_FILES['photo']['tmp_name'];
-        move_uploaded_file($file_tmp,"img/photo_recipes/".$file_name);
-        $full_photo_path = "img/photo_recipes/".$file_name;
+
+        // move_uploaded_file($file_tmp,"img/photo_recipes/".$file_name);
+        // $full_photo_path = "img/photo_recipes/".$file_name;
+        if($_FILES['photo']['size'] > 2097152){
+            $photoErr = 'Фото повинно бути розміром менше 2 Мб';
+            $wasError = true;
+        }
+
+        switch ($_FILES['photo']['type']) {
+            case 'image/jpeg':
+            //case 'image/jpg':
+                $type = 'jpeg';
+                break;
+
+            case 'image/png':
+                $type = 'png';
+                break;
+
+            default:
+                $photoErr = "Фото повинно бути форматом jpeg або png та повинно бути розміром менше 2 Мб";
+                $wasError = true;
+                break;
+        }
+
+
+
     }
 
-    $optionErr = '';
-    if(isset($_POST["send"])){
+    if(!preg_match("/^[a-zA-Zа-яА-Я\d]{1,}[a-zA-Zа-яА-Я\d\s]*$/u", htmlspecialchars($_POST["name"]))) {
+        $nameErr ="Тільки літери та цифри!";
+        $wasError = true;
+    }
+
+    if ($wasError == false){
         $name=htmlspecialchars ($_POST["name"]);
         $cooking_desc=htmlspecialchars ($_POST["cooking_desc"]);
-        $photo;
+
+        move_uploaded_file($file_tmp,"img/photo_recipes/".$file_name);
+        $full_photo_path = "img/photo_recipes/".$file_name;
+
         $dish_type_id = $_POST["dish_type"];
         $cooking_method_id = $_POST["cooking_method"];
         $cuisine_id = $_POST["cuisine"];
@@ -35,8 +73,9 @@
             exit;
 
         }
-        $MyData->close();
     }
+    $MyData->close();
+}
 ?>
 
 
@@ -51,6 +90,7 @@
                     <div class="messages"></div>
                     <div class="controls">
                         <div style="color:red;" class="help-block with-errors"><?=$optionErr?></div>
+                        <div style="color:red;" class="help-block with-errors"><?=$nameErr?></div>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -67,7 +107,7 @@
                                         <?php
                                         while(($row = $allcuisine->fetch_assoc())!=false){
                                             echo "<option value='".$row['id']."'>".$row['name']."</option><br/>";
-  										}
+                                        }
                                         ?>
                                     </select>
 
@@ -85,7 +125,7 @@
                                         <?php
                                         while(($row = $allcookingmethod->fetch_assoc())!=false){
                                             echo "<option value='".$row['id']."'>".$row['name']."</option><br/>";
-  										}
+                                        }
                                         ?>
                                     </select>
                                     <div class="help-block with-errors"></div>
@@ -108,8 +148,8 @@
                             </div>
                         </div>
 
+                        <div class="help-block with-errors" style='color:red;'><?=$photoErr?></div>
                         <div class="row">
-
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="form_photo">Фото *</label>
@@ -122,57 +162,57 @@
                         </div>
 
                         <!-- <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="form_ingredients">Інгредієнт *</label>
-                                    <select required  class="form-control" name="dish_type" id="form_ingredients">
-                                        <?php
-                                        // while(($row = $allingredients->fetch_assoc())!=false){
-                                        //     echo "<option value='".$row['id']."'>".$row['name']."</option><br/>";
-                                        // }
-                                        ?>
-                                    </select>
-                                    <div class="help-block with-errors"></div>
-                                </div>
-                            </div>
+                        <div class="col-md-3">
+                        <div class="form-group">
+                        <label for="form_ingredients">Інгредієнт *</label>
+                        <select required  class="form-control" name="dish_type" id="form_ingredients">
+                        <?php
+                        // while(($row = $allingredients->fetch_assoc())!=false){
+                        //     echo "<option value='".$row['id']."'>".$row['name']."</option><br/>";
+                        // }
+                        ?>
+                    </select>
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
 
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="form_unit_measure">Одиниця вимірювання *</label>
-                                    <input id="form_unit_measure" type="text" name="unit_measure" class="form-control" placeholder="Введіть од. вим. *" required="required" data-error="Firstname is required.">
-                                    <div class="help-block with-errors"></div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="form_count">К-сть *</label>
-                                    <input id="form_count" type="text" name="count" class="form-control" placeholder="Введіть к-сть *" required="required" data-error="Firstname is required."
-                                    <div class="help-block with-errors"></div>
-                                </div>
-                            </div>
-
-                        </div> -->
-
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="form_message">Опис приготування *</label>
-                                    <textarea maxlength="5000" id="form_message" name="cooking_desc" class="form-control" placeholder="Заповніть опис приготування страви *" rows="4" required="required" data-error="Please,leave us a message."></textarea>
-                                    <div class="help-block with-errors"></div>
-                                </div>
-                            </div>
-
-                            <form class="" action="" method="get">
-                                <div class="col-md-12">
-                                    <input type="submit" name="send" class="btn btn-success btn-send" value="Додати">
-                                </div>
-                            </form>
-
-                        </div>
-                    </div>
-                </form>
-            </div><!-- /.col-lg-8 col-lg-offset-2 -->
-        </div> <!-- /.row-->
+            <div class="col-md-3">
+            <div class="form-group">
+            <label for="form_unit_measure">Одиниця вимірювання *</label>
+            <input id="form_unit_measure" type="text" name="unit_measure" class="form-control" placeholder="Введіть од. вим. *" required="required" data-error="Firstname is required.">
+            <div class="help-block with-errors"></div>
+        </div>
     </div>
+
+    <div class="col-md-3">
+    <div class="form-group">
+    <label for="form_count">К-сть *</label>
+    <input id="form_count" type="text" name="count" class="form-control" placeholder="Введіть к-сть *" required="required" data-error="Firstname is required."
+    <div class="help-block with-errors"></div>
+</div>
+</div>
+
+</div> -->
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            <label for="form_message">Опис приготування *</label>
+            <textarea maxlength="5000" id="form_message" name="cooking_desc" class="form-control" placeholder="Заповніть опис приготування страви *" rows="4" required="required" data-error="Please,leave us a message."></textarea>
+            <div class="help-block with-errors"></div>
+        </div>
+    </div>
+
+    <form class="" action="" method="get">
+        <div class="col-md-12">
+            <input type="submit" name="send" class="btn btn-success btn-send" value="Додати">
+        </div>
+    </form>
+
+</div>
+</div>
+</form>
+</div><!-- /.col-lg-8 col-lg-offset-2 -->
+</div> <!-- /.row-->
+</div>
 </section>

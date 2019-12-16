@@ -62,38 +62,44 @@ $allrecipes = $MyData->query("SELECT `recipe`.`id`, `recipe`.`name`, `recipe`.`c
 					INNER JOIN `favorite_recipe` ON `recipe`.`id` = `favorite_recipe`.`recipe_id`
 					WHERE `favorite_recipe`.`recipe_id` = ".$id);
 					$row_recipes = $recipes->fetch_assoc();
-					if($row_recipes['user_id'] != $_SESSION['MyID'] ){
-						if($recipes->num_rows==0){
-							echo "
-							<div class='col-md-24'>
-							<form method = 'get'>
-							<input name='id' type='text' value='".$id."' style='display:none;'>
-							<button type='submit' name='fav'  class='btn btn-outline-danger'>Додати до улюблених</button>
-							</form>
-							</div>";
-						}
-						else{
-							echo "
-							<div class='col-md-24'>
-							<form method = 'post' action=''>
-							<button type='submit' name='del' value='".$id."' class='btn btn-outline-danger'>Видалити з улюблених</button>
-							</form>
-							</div>";
+
+					if(isset($_SESSION["MyID"])){
+						if($row_recipes['user_id'] != $_SESSION['MyID'] ){
+							if($recipes->num_rows==0){
+								echo "
+								<div class='col-md-24'>
+								<form method = 'get'>
+								<input name='id' type='text' value='".$id."' style='display:none;'>
+								<button type='submit' name='fav'  class='btn btn-outline-danger'>Додати до улюблених</button>
+								</form>
+								</div>";
+							}
+							else{
+								echo "
+								<div class='col-md-24'>
+								<form method = 'post' action=''>
+								<button type='submit' name='del' value='".$id."' class='btn btn-outline-danger'>Видалити з улюблених</button>
+								</form>
+								</div>";
+							}
+
 						}
 					}
-						if(isset($_GET["fav"]) && isset($_SESSION["MyID"])){
-							$user_id = $_SESSION['MyID'];
-							$recipe_id = $_GET['id'];
-							$MyData->query("INSERT INTO `favorite_recipe` (`user_id`, `recipe_id`) VALUES ('$user_id', '$recipe_id')");
-							//echo "<script>location.assign('?action=myFavorite')</script>";
-						}
+					if(isset($_GET["fav"]) && isset($_SESSION["MyID"])){
+						$user_id = $_SESSION['MyID'];
+						$recipe_id = $_GET['id'];
+						$MyData->query("INSERT INTO `favorite_recipe` (`user_id`, `recipe_id`) VALUES ('$user_id', '$recipe_id')");
+						//echo "<script>location.assign('?action=myFavorite')</script>";
+					}
 
-						if(isset($_POST["del"]) && isset($_SESSION["MyID"])){
-							$user_id = $_SESSION['MyID'];
-							//$recipe_id = $_GET['id'];
-							$res = $MyData->query("DELETE FROM `favorite_recipe` WHERE `user_id` = '$user_id' AND `recipe_id` = '$id'");
-							//echo "<script>location.assign('?action=myFavorite')</script>";
-						}
+
+					if(isset($_POST["del"]) && isset($_SESSION["MyID"])){
+						$user_id = $_SESSION['MyID'];
+						//$recipe_id = $_GET['id'];
+						$res = $MyData->query("DELETE FROM `favorite_recipe` WHERE `user_id` = '$user_id' AND `recipe_id` = '$id'");
+						//echo "<script>location.assign('?action=myFavorite')</script>";
+					}
+
 
 					$MyData->close();
 					?>

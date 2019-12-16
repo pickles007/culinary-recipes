@@ -51,11 +51,11 @@
 		}
     }
 
-    if(isset($_GET["fav"]) && isset($_SESSION["MyID"])){
-        $user_id = $_SESSION['MyID'];
-        $recipe_id = $_GET['id'];
-        $MyData->query("INSERT INTO `favorite_recipe` (`user_id`, `recipe_id`) VALUES ('$user_id', '$recipe_id')");
-    }
+    // if(isset($_GET["fav"]) && isset($_SESSION["MyID"])){
+    //     $user_id = $_SESSION['MyID'];
+    //     $recipe_id = $_GET['id'];
+    //     $MyData->query("INSERT INTO `favorite_recipe` (`user_id`, `recipe_id`) VALUES ('$user_id', '$recipe_id')");
+    // }
 
 	$MyData->close();
 ?>

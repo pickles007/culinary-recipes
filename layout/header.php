@@ -90,77 +90,77 @@
                                     <ul>
                                         <li>
                                             <form method = "get">
-                                                    <a href="?dishtype=Закуски&action=bydishtype" name="action" value="Закуски">Закуски</a>
-                                                </form>
-                                            </li>
-                                            <li>
-                                                <form method = "get">
-                                                        <a href="?dishtype=Салати&action=bydishtype" name="action" value="Салати">Салати</a>
-                                                    </form>
-                                                </li>
-                                                <li>
-                                                    <form method = "get">
-                                                            <a href="?dishtype=Перші страви&action=bydishtype" name="action" value="Перші страви">Перші страви</a>
-                                                        </form>
-                                                    </li>
-                                                    <li>
-                                                        <form method = "get">
-                                                                <a href="?dishtype=Другі Страви&action=bydishtype" name="action" value="Другі Страви">Другі Страви</a>
-                                                            </form>
-                                                        </li>
-                                                        <li>
-                                                            <form method = "get">
-                                                                    <a href="?dishtype=Десерти&action=bydishtype" name="action" value="Десерти">Десерти</a>
-                                                                </form>
-                                                            </li>
-                                                        </ul>
-                                                    </li>
+                                                <a href="?dishtype=Закуски&action=bydishtype" name="action" value="Закуски">Закуски</a>
+                                            </form>
+                                        </li>
+                                        <li>
+                                            <form method = "get">
+                                                <a href="?dishtype=Салати&action=bydishtype" name="action" value="Салати">Салати</a>
+                                            </form>
+                                        </li>
+                                        <li>
+                                            <form method = "get">
+                                                <a href="?dishtype=Перші страви&action=bydishtype" name="action" value="Перші страви">Перші страви</a>
+                                            </form>
+                                        </li>
+                                        <li>
+                                            <form method = "get">
+                                                <a href="?dishtype=Другі Страви&action=bydishtype" name="action" value="Другі Страви">Другі Страви</a>
+                                            </form>
+                                        </li>
+                                        <li>
+                                            <form method = "get">
+                                                <a href="?dishtype=Десерти&action=bydishtype" name="action" value="Десерти">Десерти</a>
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </li>
 
-                                                    <li class="menu-has-children"><a href="">За способом приготування </a>
-                                                        <ul>
-                                  <li>
-                                    <form method = "get">
-                                      <a href="?cookingtype=Смажені&action=bycookingmethod" name="cookingtype" value="Смажені">Смажені</a>
+                                <li class="menu-has-children"><a href="">За способом приготування </a>
+                                    <ul>
+                                        <li>
+                                            <form method = "get">
+                                                <a href="?cookingtype=Смажені&action=bycookingmethod" name="cookingtype" value="Смажені">Смажені</a>
+                                            </form>
+                                        </li>
+                                        <li><form method = "get">
+                                            <a href="?cookingtype=Варені&action=bycookingmethod" name="cookingtype" value="Варені">Варені</a>
+                                        </form>
+                                    </li>
+                                    <li><form method = "get">
+                                        <a href="?cookingtype=Тушені&action=bycookingmethod" name="cookingtype" value="Тушені">Тушені</a>
                                     </form>
-                                  </li>
-                                  <li><form method = "get">
-                                      <a href="?cookingtype=Варені&action=bycookingmethod" name="cookingtype" value="Варені">Варені</a>
-                                    </form>
-                                  </li>
-                                  <li><form method = "get">
-                                      <a href="?cookingtype=Тушені&action=bycookingmethod" name="cookingtype" value="Тушені">Тушені</a>
-                                    </form>
-                                  </li>
-                                  <li><form method = "get">
-                                      <a href="?cookingtype=Печені&action=bycookingmethod" name="cookingtype" value="Печені">Печені</a>
-                                    </form>
-                                  </li>
-                                  <li><form method = "get">
-                                      <a href="?cookingtype=Різані&action=bycookingmethod" name="cookingtype" value="Різані">Різані</a>
-                                    </form>
-                                  </li>
-                                </ul>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <?php
-                                            if(isset($_SESSION["MyID"])){
-                                                //echo "<a href='?action=create_news' class='aaa aaa1'>Додати новину</a> <br> <br>";
-                                                echo "<li><a href='?action=createRecipe'>Додати рецепт</a></li>";
-                                                echo "<li><a href='?action=myRecipe'>Мої рецепти</a></li>";
-                                                echo "<li><a href='?action=myFavorite'>Улюблені</a></li>";
-                                                echo "<li><a href='?action=myAccount'>Профіль</a></li>";
-                                                echo "<li><a href='?action=sessionEnd'>Вийти</a></li>";
-                                            }
-                                            else{
-                                                echo "<li><a href='?action=registration'>Зареєструватись</a></li>";
-                                                echo "<li><a href='?action=login'>Увійти</a></li>";
-                                            }
-                                            ?>
+                                </li>
+                                <li><form method = "get">
+                                    <a href="?cookingtype=Печені&action=bycookingmethod" name="cookingtype" value="Печені">Печені</a>
+                                </form>
+                            </li>
+                            <li><form method = "get">
+                                <a href="?cookingtype=Різані&action=bycookingmethod" name="cookingtype" value="Різані">Різані</a>
+                            </form>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li><a href='?action=search'>Пошук</a></li>
+        <?php
+        if(isset($_SESSION["MyID"])){
+            echo "<li><a href='?action=createRecipe'>Додати рецепт</a></li>";
+            echo "<li><a href='?action=myRecipe'>Мої рецепти</a></li>";
+            echo "<li><a href='?action=myFavorite'>Улюблені</a></li>";
+            echo "<li><a href='?action=myAccount'>Профіль</a></li>";
+            echo "<li><a href='?action=sessionEnd'>Вийти</a></li>";
+        }
+        else{
+            echo "<li><a href='?action=registration'>Зареєструватись</a></li>";
+            echo "<li><a href='?action=login'>Увійти</a></li>";
+        }
+        ?>
 
-
-                                        </ul>
-                                    </nav><!-- #nav-menu-container -->
-                                </div>
-                            </div>
-                        </header><!-- #header -->
+</ul>
+</nav><!-- #nav-menu-container -->
+</div>
+</div>
+</header><!-- #header -->
+</div>

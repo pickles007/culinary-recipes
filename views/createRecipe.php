@@ -51,6 +51,9 @@ if(isset($_POST["send"])){
     }
 
     if ($wasError == false){
+
+
+
         $name=htmlspecialchars ($_POST["name"]);
         $cooking_desc=htmlspecialchars ($_POST["cooking_desc"]);
 
@@ -67,6 +70,13 @@ if(isset($_POST["send"])){
         }else{
             $date=date("Y-m-d H:i:s");
             $MyData->query("INSERT INTO `recipe` (`name`, `cooking_desc`, `photo`, `date`, `dish_type_id`, `cooking_method_id`, `cuisine_id`, `user_id`) VALUES ('$name', '$cooking_desc', '$full_photo_path', '$date', '$dish_type_id', '$cooking_method_id', '$cuisine_id', '$user_id')");
+            $recipe_id = $MyData->query("SELECT MAX(`id`) FROM `recipe`;");
+            // $row_recipe = $recipe_id->fetch_assoc();
+            $r_id = $recipe_id->fetch_row()[0];
+            //$r_id = (int)$recipe_id;
+            foreach ($_POST['ingredient'] as $ing ) {
+                $MyData->query("INSERT INTO `composition_recipe` (`recipe_id`, `ingredient_id`) VALUES ('$r_id', '$ing')");
+            }
             $MyData->close();
             include_once "views/main.php";
             include_once "layout/footer.php";
@@ -161,38 +171,38 @@ if(isset($_POST["send"])){
 
                         </div>
 
-                        <!-- <div class="row">
-                        <div class="col-md-3">
-                        <div class="form-group">
-                        <label for="form_ingredients">Інгредієнт *</label>
-                        <select required  class="form-control" name="dish_type" id="form_ingredients">
-                        <?php
-                        // while(($row = $allingredients->fetch_assoc())!=false){
-                        //     echo "<option value='".$row['id']."'>".$row['name']."</option><br/>";
-                        // }
-                        ?>
-                    </select>
-                    <div class="help-block with-errors"></div>
-                </div>
-            </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="form_ingredients">Інгредієнт *</label>
+                                    <select multiple required  class="form-control" name="ingredient[]" id="form_ingredients">
+                                        <?php
+                                        while(($row = $allingredients->fetch_assoc())!=false){
+                                            echo "<option value='".$row['id']."'>".$row['name']."</option><br/>";
+                                        }
+                                        ?>
+                                    </select>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                            <!--
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="form_unit_measure">Одиниця вимірювання *</label>
+                                    <input id="form_unit_measure" type="text" name="unit_measure" class="form-control" placeholder="Введіть од. вим. *" required="required" data-error="Firstname is required.">
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
 
-            <div class="col-md-3">
-            <div class="form-group">
-            <label for="form_unit_measure">Одиниця вимірювання *</label>
-            <input id="form_unit_measure" type="text" name="unit_measure" class="form-control" placeholder="Введіть од. вим. *" required="required" data-error="Firstname is required.">
-            <div class="help-block with-errors"></div>
-        </div>
-    </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="form_count">К-сть *</label>
+                                    <input id="form_count" type="text" name="count" class="form-control" placeholder="Введіть к-сть *" required="required" data-error="Firstname is required."
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div> -->
 
-    <div class="col-md-3">
-    <div class="form-group">
-    <label for="form_count">К-сть *</label>
-    <input id="form_count" type="text" name="count" class="form-control" placeholder="Введіть к-сть *" required="required" data-error="Firstname is required."
-    <div class="help-block with-errors"></div>
-</div>
-</div>
-
-</div> -->
+                        </div>
 
 <div class="row">
     <div class="col-md-12">

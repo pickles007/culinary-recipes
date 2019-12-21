@@ -4,6 +4,26 @@ include_once "views/sql_include.php";
 $MyData = new mysqli($host, $user, $pass, $database);
 $MyData->query("SET NAMES 'utf8'");
 $allingredients = $MyData->query("SELECT * from `ingredient`");
+$err = '';
+
+
+//$ingredient = $_POST['ingredient'];
+if(isset($_POST["send"])){
+    if(empty($_POST['name']) && empty($_POST['ingredient'])  && empty($_POST['desc'])){
+        $err = 'Для пошуку рецептів заповніть хоча б одне поле';
+    }else{
+
+    }
+    // $name = $_POST['name'];
+    // foreach ($_POST['ingredient'] as $ing ) {
+    //     echo "$ing"." ";
+    // }
+    // $ingredient = $_POST['ingredient'];
+    // $desc = $_POST['desc'];
+    // echo $name."---".$desc;
+}
+
+
 
  ?>
 
@@ -15,9 +35,10 @@ $allingredients = $MyData->query("SELECT * from `ingredient`");
                 <h1 class="text-center">Пошук рецептів</h1>
                 <p class="lead">На даній сторінці Ви можете шукати рецепти за різними критеріями.</p>
                 <form id="contact-form" method="post" action="" role="form">
-                    <div class="messages"></div>
+                    <div class="messages"><div style="color:red;" class="help-block with-errors"><?=$err?></div></div>
                     <div class="controls">
                         <div class="row">
+
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="form_name">Назва страви</label>
@@ -54,6 +75,13 @@ $allingredients = $MyData->query("SELECT * from `ingredient`");
                         </div>
                     </div>
                 </form>
+
+                <div class="row">
+
+
+
+                </div>
+
             </div><!-- /.col-lg-8 col-lg-offset-2 -->
         </div> <!-- /.row-->
     </div>

@@ -62,7 +62,6 @@ $allrecipes = $MyData->query("SELECT `recipe`.`id`, `recipe`.`name`, `recipe`.`c
 					INNER JOIN `favorite_recipe` ON `recipe`.`id` = `favorite_recipe`.`recipe_id`
 					WHERE `favorite_recipe`.`recipe_id` = ".$id);
 					$row_recipes = $recipes->fetch_assoc();
-
 					if(isset($_SESSION["MyID"])){
 						if($row_recipes['user_id'] != $_SESSION['MyID'] ){
 							if($recipes->num_rows==0){
@@ -77,8 +76,9 @@ $allrecipes = $MyData->query("SELECT `recipe`.`id`, `recipe`.`name`, `recipe`.`c
 							else{
 								echo "
 								<div class='col-md-24'>
-								<form method = 'post' action=''>
-								<button type='submit' name='del' value='".$id."' class='btn btn-outline-danger'>Видалити з улюблених</button>
+								<form method = 'post'>
+								<input name='id' type='text' value='".$id."' style='display:none;'>
+								<button type='submit' name='del' class='btn btn-outline-danger'>Видалити з улюблених</button>
 								</form>
 								</div>";
 							}

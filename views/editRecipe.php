@@ -22,7 +22,9 @@ $wasError = false;
 $photoErr = $nameErr = "";
 
 if(isset($_POST["send"])){
-	if(isset($_FILES['photo'])){
+	if(!isset($_FILES['photo'])){
+		$full_photo_path = $row["photo"];
+	}else{
 		$file_name = $_FILES['photo']['name'];
 		$file_tmp = $_FILES['photo']['tmp_name'];
 
@@ -32,6 +34,8 @@ if(isset($_POST["send"])){
 			$photoErr = 'Фото повинно бути розміром менше 2 Мб';
 			$wasError = true;
 		}
+
+
 
 		switch ($_FILES['photo']['type']) {
 			case 'image/jpeg':
@@ -114,8 +118,12 @@ $MyData->close();
 									<select required="required" class="form-control" name="cuisine" id="form_cuisine">
 										<option value="0">Оберіть кухню</option>
 										<?php
-										while(($row = $allcuisine->fetch_assoc())!=false){
-											echo "<option value='".$row['id']."'>".$row['name']."</option><br/>";
+										while(($row_cuisine = $allcuisine->fetch_assoc())!=false){
+												if($row['cuisine_id'] == $row_cuisine['id']){
+													echo "<option selected value='".$row_cuisine['id']."'>".$row_cuisine['name']."</option><br/>";
+												} else {
+													echo "<option value='".$row_cuisine['id']."'>".$row_cuisine['name']."</option><br/>";
+												}
 										}
 										?>
 									</select>
@@ -132,9 +140,12 @@ $MyData->close();
 									<select required="required" class="form-control" name="cooking_method" id="form_cooking_method">
 										<option value="0">Оберіть тип приготування</option>
 										<?php
-										while(($row = $allcookingmethod->fetch_assoc())!=false){
-											echo "<option value='".$row['id']."'>".$row['name']."</option><br/>";
-										}
+										while(($row_cooking = $allcookingmethod->fetch_assoc())!=false){
+											if($row['cooking_method_id'] == $row_cooking['id']){
+												echo "<option selected value='".$row_cooking['id']."'>".$row_cooking['name']."</option><br/>";
+											} else {
+												echo "<option value='".$row_cooking['id']."'>".$row_cooking['name']."</option><br/>";
+											}										}
 										?>
 									</select>
 									<div class="help-block with-errors"></div>
@@ -147,9 +158,12 @@ $MyData->close();
 									<select required="required" class="form-control" name="dish_type" id="form_dish_type">
 										<option value="0">Оберіть тип страви</option>
 										<?php
-										while(($row = $alldishtype->fetch_assoc())!=false){
-											echo "<option value='".$row['id']."'>".$row['name']."</option><br/>";
-										}
+										while(($row_dish_type = $alldishtype->fetch_assoc())!=false){
+											if($row['dish_type_id'] == $row_dish_type['id']){
+												echo "<option selected value='".$row_dish_type['id']."'>".$row_dish_type['name']."</option><br/>";
+											} else {
+												echo "<option value='".$row_dish_type['id']."'>".$row_dish_type['name']."</option><br/>";
+											}											}
 										?>
 									</select>
 									<div class="help-block with-errors"></div>
@@ -162,7 +176,7 @@ $MyData->close();
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="form_photo">Фото *</label>
-									<input id="form_photo" type="file" name="photo" class="form-control-file" placeholder="Виберіть інградієнти *" required="required" data-error="Valid email is required." value="<?=$photo?>">
+									<input id="form_photo" type="file" name="photo" class="form-control-file" placeholder="Виберіть інградієнти *"  data-error="Valid email is required." value="<?=$photo?>">
 									<div class="help-block with-errors"></div>
 								</div>
 							</div>

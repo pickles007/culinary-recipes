@@ -45,7 +45,7 @@ if(isset($_POST["send"])){
 
     }
 
-    if(!preg_match("/^[a-zA-Zа-яА-Я\d]{1,}[a-zA-Zа-яА-Я\d\s]*$/u", htmlspecialchars($_POST["name"]))) {
+    if(!preg_match("/^[a-zA-Zа-яА-ЯіІ\d]{1,}[a-zA-Zа-яА-ЯіІ\d\s]*$/u", htmlspecialchars($_POST["name"]))) {
         $nameErr ="Тільки літери та цифри!";
         $wasError = true;
     }

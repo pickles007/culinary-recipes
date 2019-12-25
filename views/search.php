@@ -4,6 +4,11 @@
     $MyData->query("SET NAMES 'utf8'");
     $allingredients = $MyData->query("SELECT * from `ingredient`");
     $err = '';
+    if(isset($_POST["send"])){
+        if(empty($_POST['name']) && empty($_POST['ingredient'])  && empty($_POST['desc'])){
+            $err = 'Для пошуку рецептів заповніть хоча б одне поле';
+        }
+    }
  ?>
 
 
@@ -40,8 +45,8 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="form_name">Опис страви</label>
-                                    <input id="form_name" type="text" name="desc" class="form-control" placeholder="Опис страви" >
+                                    <label for="form_desc">Опис страви</label>
+                                    <input id="form_desc" type="text" name="desc" class="form-control" placeholder="Опис страви" >
                                 </div>
                             </div>
 
@@ -85,7 +90,7 @@
                                         <div class='row d-flex justify-content-center'>
                                         <div class='menu-content pb-70 col-lg-8'>
                                         <div class='title text-center'>
-                                        <h1>На жаль, рецептів не знайдено.</h1>
+                                        <h1>Нажаль, рецептів не знайдено.</h1>
                                             </div></div></div>
                                             </div>
                                         ";
@@ -125,7 +130,7 @@
                                         <div class='row d-flex justify-content-center'>
                                         <div class='menu-content pb-70 col-lg-8'>
                                         <div class='title text-center'>
-                                        <h1>На жаль, рецептів не знайдено.</h1>
+                                        <h1>Нажаль, рецептів не знайдено.</h1>
                                             </div></div></div>
                                             </div>
                                         ";
@@ -165,7 +170,7 @@
                                         <div class='row d-flex justify-content-center'>
                                         <div class='menu-content pb-70 col-lg-8'>
                                         <div class='title text-center'>
-                                        <h1>На жаль, рецептів не знайдено.</h1>
+                                        <h1>Нажаль, рецептів не знайдено.</h1>
                                             </div></div></div>
                                             </div>
                                         ";
@@ -183,33 +188,68 @@
                                     }
                                 }
                             }
-                            // коли введено НАЗВУ СТРАВИ та ІНГРЕДІЄНТИ
+                            // коли введено НАЗВУ СТРАВИ та ІНГРЕДІЄНТИ +++
                             else if(!empty($_POST['name']) && !empty($_POST['ingredient'])  && empty($_POST['desc'])){
-
+                                $searchName = explode(" ", $_POST['name']);
+                                $countName = count($searchName);
+                                $countIngredient = count($_POST['ingredient']);
+                                $str = array();
+                                foreach ($searchName as $key) {
+                                        $str[] = "name LIKE '%".$key."%' OR ";
+                                }
+                                $i = 0;
+                                foreach ($_POST['ingredient'] as $key) {
+                                    $i++;
+                                    if($i < $countIngredient){
+                                        $str[] = "`composition_recipe`.`ingredient_id` = ".$key." OR ";
+                                    }else{
+                                        $str[] = "`composition_recipe`.`ingredient_id` = ".$key;
+                                    }
+                                }
+                                $sql = "SELECT DISTINCT `recipe`.`id`, `recipe`.`name`, `recipe`.`date`, `recipe`.`photo`, `recipe`.`cooking_desc` FROM `recipe` INNER JOIN `composition_recipe` ON `recipe`.`id` = `composition_recipe`.`recipe_id`  WHERE ".implode("", $str);
+                                // echo $sql;
+                                $allRecipe = $MyData->query("$sql");
+                                if($allRecipe->num_rows==0){
+                                    echo "
+                                        <div class='container'>
+                                        <div class='row d-flex justify-content-center'>
+                                        <div class='menu-content pb-70 col-lg-8'>
+                                        <div class='title text-center'>
+                                        <h1>Нажаль, рецептів не знайдено.</h1>
+                                            </div></div></div>
+                                            </div>
+                                        ";
+                                }else{
+                                    while(($row = $allRecipe->fetch_assoc())!=false){
+                                        echo "<div class='col-lg-3 col-md-6 col-sm-6 single-blog'>";
+                                        echo "<div class='thumb'><img class='img-fluid' src='".$row["photo"]."' alt=''></div>";
+                                        echo "<p class='date'>".date("d-m-Y", strtotime($row["date"]))."</p>";
+                                        echo "<form method='get'>";
+                                        echo "<input name='id' type='text' value='".$row["id"]."' style='display:none;'>";
+                                        echo "<button type='submit' value='fullrecipe' name='action'><h4>".$row["name"]."</h4></button>";
+                                        echo "</form>";
+                                        echo "<p>".mb_strimwidth($row["cooking_desc"], 0, 45, "...")."</p>";
+                                        echo "</div>";
+                                    }
+                                }
                             }
-                            // коли введено НАЗВУ СТРАВИ та ОПИС СТРАВИ
+                            // коли введено НАЗВУ СТРАВИ та ОПИС СТРАВИ +++
                             else if(!empty($_POST['name']) && empty($_POST['ingredient'])  && !empty($_POST['desc'])){
                                 $searchName = explode(" ", $_POST['name']);
                                 $searchDesc = explode(" ", $_POST['desc']);
-                                //$countName = count($searchName);
-                                $countDesc = count($searchDesc);
+                                $countName = count($searchName);
                                 $str = array();
+                                $i = 0;
+                                foreach ($searchDesc as $key) {
+                                        $str[] = "  cooking_desc LIKE '%".$key."%' OR ";
+                                }
                                 $i = 0;
                                 foreach ($searchName as $key) {
                                     $i++;
-                                    // if($i < $countName){
+                                    if($i < $countName){
                                         $str[] = "name LIKE '%".$key."%' OR ";
-                                    // }else{
-                                    //     $str[] = "name LIKE '%".$key."%'";
-                                    // }
-                                }
-                                $i = 0;
-                                foreach ($searchDesc as $key) {
-                                    $i++;
-                                    if($i < $countDesc){
-                                        $str[] = "`desc` LIKE '%".$key."%' OR ";
                                     }else{
-                                        $str[] = "`desc` LIKE '%".$key."%'";
+                                        $str[] = "name LIKE '%".$key."%'";
                                     }
                                 }
                                 $sql = "SELECT * FROM `recipe` WHERE ".implode("", $str);
@@ -220,7 +260,7 @@
                                         <div class='row d-flex justify-content-center'>
                                         <div class='menu-content pb-70 col-lg-8'>
                                         <div class='title text-center'>
-                                        <h1>На жаль, рецептів не знайдено.</h1>
+                                        <h1>Нажаль, рецептів не знайдено.</h1>
                                             </div></div></div>
                                             </div>
                                         ";
@@ -238,13 +278,99 @@
                                     }
                                 }
                             }
-                            // коли введено  ІНГРЕДІЄНТИ та ОПИС СТРАВИ
+                            // коли введено  ІНГРЕДІЄНТИ та ОПИС СТРАВИ +++
                             else if(empty($_POST['name']) && !empty($_POST['ingredient'])  && !empty($_POST['desc'])){
-
+                                $searchDesc = explode(" ", $_POST['desc']);
+                                $countDesc = count($searchDesc);
+                                $countIngredient = count($_POST['ingredient']);
+                                $str = array();
+                                foreach ( $_POST['ingredient'] as $key) {
+                                        $str[] = "`composition_recipe`.`ingredient_id` = ".$key." OR ";
+                                }
+                                $i = 0;
+                                foreach ($searchDesc as $key) {
+                                    $i++;
+                                    if($i < $countDesc){
+                                        $str[] = "cooking_desc LIKE '%".$key."%' OR ";
+                                    }else{
+                                        $str[] = "cooking_desc LIKE '%".$key."%'";
+                                    }
+                                }
+                                $sql = "SELECT DISTINCT `recipe`.`id`, `recipe`.`name`, `recipe`.`date`, `recipe`.`photo`, `recipe`.`cooking_desc` FROM `recipe` INNER JOIN `composition_recipe` ON `recipe`.`id` = `composition_recipe`.`recipe_id`  WHERE ".implode("", $str);
+                                $allRecipe = $MyData->query("$sql");
+                                if($allRecipe->num_rows==0){
+                                    echo "
+                                        <div class='container'>
+                                        <div class='row d-flex justify-content-center'>
+                                        <div class='menu-content pb-70 col-lg-8'>
+                                        <div class='title text-center'>
+                                        <h1>Нажаль, рецептів не знайдено.</h1>
+                                            </div></div></div>
+                                            </div>
+                                        ";
+                                }else{
+                                    while(($row = $allRecipe->fetch_assoc())!=false){
+                                        echo "<div class='col-lg-3 col-md-6 col-sm-6 single-blog'>";
+                                        echo "<div class='thumb'><img class='img-fluid' src='".$row["photo"]."' alt=''></div>";
+                                        echo "<p class='date'>".date("d-m-Y", strtotime($row["date"]))."</p>";
+                                        echo "<form method='get'>";
+                                        echo "<input name='id' type='text' value='".$row["id"]."' style='display:none;'>";
+                                        echo "<button type='submit' value='fullrecipe' name='action'><h4>".$row["name"]."</h4></button>";
+                                        echo "</form>";
+                                        echo "<p>".mb_strimwidth($row["cooking_desc"], 0, 45, "...")."</p>";
+                                        echo "</div>";
+                                    }
+                                }
                             }
-                            // коли ВСІ поля введено
+                            // коли ВСІ поля введено +++
                             else if(!empty($_POST['name']) && !empty($_POST['ingredient'])  && !empty($_POST['desc'])){
-
+                                $searchName = explode(" ", $_POST['name']);
+                                $searchDesc = explode(" ", $_POST['desc']);
+                                // $countName = count($searchName);
+                                // $countDesc = count($searchDesc);
+                                $countIngredient = count($_POST['ingredient']);
+                                $str = array();
+                                foreach ($searchName as $key) {
+                                        $str[] = "name LIKE '%".$key."%' OR ";
+                                }
+                                foreach ($searchDesc as $key) {
+                                        $str[] = "cooking_desc LIKE '%".$key."%' OR ";
+                                }
+                                $i = 0;
+                                foreach ($_POST['ingredient'] as $key) {
+                                    $i++;
+                                    if($i < $countIngredient){
+                                        $str[] = "`composition_recipe`.`ingredient_id` = ".$key." OR ";
+                                    }else{
+                                        $str[] = "`composition_recipe`.`ingredient_id` = ".$key;
+                                    }
+                                }
+                                $sql = "SELECT DISTINCT `recipe`.`id`, `recipe`.`name`, `recipe`.`date`, `recipe`.`photo`, `recipe`.`cooking_desc` FROM `recipe` INNER JOIN `composition_recipe` ON `recipe`.`id` = `composition_recipe`.`recipe_id`  WHERE ".implode("", $str);
+                                // echo "$sql";
+                                $allRecipe = $MyData->query("$sql");
+                                if($allRecipe->num_rows==0){
+                                    echo "
+                                        <div class='container'>
+                                        <div class='row d-flex justify-content-center'>
+                                        <div class='menu-content pb-70 col-lg-8'>
+                                        <div class='title text-center'>
+                                        <h1>Нажаль, рецептів не знайдено.</h1>
+                                            </div></div></div>
+                                            </div>
+                                        ";
+                                }else{
+                                    while(($row = $allRecipe->fetch_assoc())!=false){
+                                        echo "<div class='col-lg-3 col-md-6 col-sm-6 single-blog'>";
+                                        echo "<div class='thumb'><img class='img-fluid' src='".$row["photo"]."' alt=''></div>";
+                                        echo "<p class='date'>".date("d-m-Y", strtotime($row["date"]))."</p>";
+                                        echo "<form method='get'>";
+                                        echo "<input name='id' type='text' value='".$row["id"]."' style='display:none;'>";
+                                        echo "<button type='submit' value='fullrecipe' name='action'><h4>".$row["name"]."</h4></button>";
+                                        echo "</form>";
+                                        echo "<p>".mb_strimwidth($row["cooking_desc"], 0, 45, "...")."</p>";
+                                        echo "</div>";
+                                    }
+                                }
                             }
 
                         }
@@ -256,7 +382,7 @@
                         // $desc = $_POST['desc'];
                         // echo $name."---".$desc;
                     }
-
+                    $MyData->close();
                      ?>
 
                 </div>

@@ -24,6 +24,7 @@ $photoErr = $nameErr = "";
 if(isset($_POST["send"])){
 	if(!isset($_FILES['photo'])){
 		$full_photo_path = $row["photo"];
+		// $full_photo_path = "img/photo_recipes/vareniki.jpg";
 	}else{
 		$file_name = $_FILES['photo']['name'];
 		$file_tmp = $_FILES['photo']['tmp_name'];
@@ -35,23 +36,21 @@ if(isset($_POST["send"])){
 			$wasError = true;
 		}
 
-
-
-		switch ($_FILES['photo']['type']) {
-			case 'image/jpeg':
-			//case 'image/jpg':
-			$type = 'jpeg';
-			break;
-
-			case 'image/png':
-			$type = 'png';
-			break;
-
-			default:
-			$photoErr = "Фото повинно бути форматом jpeg або png та повинно бути розміром менше 2 Мб";
-			$wasError = true;
-			break;
-		}
+		// switch ($_FILES['photo']['type']) {
+		// 	case 'image/jpeg':
+		// 	//case 'image/jpg':
+		// 	$type = 'jpeg';
+		// 	break;
+		//
+		// 	case 'image/png':
+		// 	$type = 'png';
+		// 	break;
+		//
+		// 	default:
+		// 	$photoErr = "Фото повинно бути форматом jpeg або png та повинно бути розміром менше 2 Мб";
+		// 	$wasError = true;
+		// 	break;
+		// }
 	}
 
 	if(!preg_match("/^[a-zA-Zа-яА-Я\d]{1,}[a-zA-Zа-яА-Я\d\s]*$/u", htmlspecialchars($_POST["name"]))) {
@@ -59,12 +58,20 @@ if(isset($_POST["send"])){
 		$wasError = true;
 	}
 
-	if ($wasError == false){
+
+
+	if (!$wasError){
 		$name=htmlspecialchars ($_POST["name"]);
 		$cooking_desc=htmlspecialchars ($_POST["cooking_desc"]);
 
-		move_uploaded_file($file_tmp,"img/photo_recipes/".$file_name);
-		$full_photo_path = "img/photo_recipes/".$file_name;
+		if(empty($_FILES['photo']['name'])){
+			$full_photo_path = $row["photo"];
+		}else{
+			move_uploaded_file($file_tmp,"img/photo_recipes/".$file_name);
+			$full_photo_path = "img/photo_recipes/".$file_name;
+		}
+
+
 
 		$dish_type_id = $_POST["dish_type"];
 		$cooking_method_id = $_POST["cooking_method"];
@@ -84,6 +91,8 @@ if(isset($_POST["send"])){
 			exit;
 
 		}
+	} else {
+
 	}
 	// $MyData->close();
 

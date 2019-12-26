@@ -17,7 +17,15 @@
     <title>Culinary blog</title>
 
 
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script> -->
+
+<!-- (Optional) Latest compiled and minified JavaScript translation files -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/i18n/defaults-*.min.js"></script> -->
+    <!-- Latest compiled and minified CSS -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css"> --> -
 
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
@@ -33,7 +41,7 @@
     <link rel="stylesheet" href="css/animate.min.css">
     <link rel="stylesheet" href="css/owl.carousel.css">
     <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"> -->
 </head>
 <body>
     <header id="header">
@@ -143,7 +151,6 @@
                 </li>
             </ul>
         </li>
-        <li><a href='?action=search'>Пошук</a></li>
         <?php
         if(isset($_SESSION["MyID"])){
             echo "<li><a href='?action=createRecipe'>Додати рецепт</a></li>";
@@ -157,6 +164,8 @@
             echo "<li><a href='?action=login'>Увійти</a></li>";
         }
         ?>
+        <li>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</li>
+        <li><a href='?action=search'>Пошук</a></li>
 
 </ul>
 </nav><!-- #nav-menu-container -->

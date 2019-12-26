@@ -9,6 +9,9 @@
             $err = 'Для пошуку рецептів заповніть хоча б одне поле';
         }
     }
+
+    $title_name = $_POST['name'];
+    $title_desc = $_POST['desc'];
  ?>
 
 
@@ -17,7 +20,6 @@
         <div class="row">
             <div class="col-lg-12 col-lg-offset-2">
                 <h1 class="text-center">Пошук рецептів</h1>
-                <p class="lead">На даній сторінці Ви можете шукати рецепти за різними критеріями.</p>
                 <form id="contact-form" method="post" action="" role="form">
                     <div class="messages"><div style="color:red;" class="help-block with-errors"><?=$err?></div></div>
                     <div class="controls">
@@ -26,14 +28,15 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="form_name">Назва страви</label>
-                                    <input id="form_name" type="text" name="name" class="form-control" placeholder="Назва страви"  >
+                                    <input id="form_name" value="<?=$title_name?>" type="text" name="name" class="form-control" placeholder="Назва страви"  >
                                 </div>
                             </div>
 
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="form_name">Інгредієнт</label>
-                                    <select multiple class="form-control" name="ingredient[]" id="form_ingredients">
+                                    <select multiple class="form-control" size="0" name="ingredient[]" id="form_ingredients">
+                                        <option value="none" selected disabled > Виберіть інгредієнт </option>
                                         <?php
                                         while(($row = $allingredients->fetch_assoc())!=false){
                                             echo "<option value='".$row['id']."'>".$row['name']."</option><br/>";
@@ -43,17 +46,24 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-6">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="form_desc">Опис страви</label>
-                                    <input id="form_desc" type="text" name="desc" class="form-control" placeholder="Опис страви" >
+                                    <textarea maxlength="5000"  id="form_message" name="desc" class="form-control" placeholder="Заповніть опис приготування страви" rows="4" ><?=$title_desc?></textarea>
+                                    <!-- <input id="form_desc" type="text" name="desc" class="form-control" placeholder="Опис страви" > -->
                                 </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <br>
+
+                                <input style="margin-top:8px;" type="reset" name="reset" class="btn btn-success btn btn-warning btn-send" value="Очистити фільтри">
                             </div>
 
                         </div>
 
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-3">
                                 <input type="submit" name="send" class="btn btn-success btn-send" value="Шукати">
                             </div>
                         </div>

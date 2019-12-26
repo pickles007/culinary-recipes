@@ -58,9 +58,7 @@ $allrecipes = $MyData->query("SELECT `recipe`.`id`, `recipe`.`name`, `recipe`.`c
 				<?php
 				$MyData = new mysqli($host, $user, $pass, $database);
 				$MyData->query("SET NAMES 'utf8'");
-				$recipes = $MyData->query("SELECT `recipe`.`id`, `favorite_recipe`.`recipe_id`, `recipe`.`user_id` FROM `recipe`
-					INNER JOIN `favorite_recipe` ON `recipe`.`id` = `favorite_recipe`.`recipe_id`
-					WHERE `favorite_recipe`.`recipe_id` = ".$id);
+				$recipes = $MyData->query("SELECT `recipe`.`id`, `favorite_recipe`.`recipe_id`, `recipe`.`user_id` FROM `recipe` INNER JOIN `favorite_recipe` ON `recipe`.`id` = `favorite_recipe`.`recipe_id` WHERE `favorite_recipe`.`recipe_id` = ".$id);
 					$row_recipes = $recipes->fetch_assoc();
 					if(isset($_SESSION["MyID"])){
 						if($row_recipes['user_id'] != $_SESSION['MyID'] ){

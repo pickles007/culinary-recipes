@@ -24,13 +24,14 @@
                     <div class="messages"><div style="color:red;" class="help-block with-errors"><?=$err?></div></div>
                     <div class="controls">
                         <div class="row">
-
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="form_name">Назва страви</label>
                                     <input id="form_name" value="<?=$title_name?>" type="text" name="name" class="form-control" placeholder="Назва страви"  >
                                 </div>
                             </div>
+
+                            
 
                             <div class="col-md-3">
                                 <div class="form-group">
@@ -49,8 +50,8 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="form_desc">Опис страви</label>
-                                    <textarea maxlength="5000"  id="form_message" name="desc" class="form-control" placeholder="Заповніть опис приготування страви" rows="4" ><?=$title_desc?></textarea>
-                                    <!-- <input id="form_desc" type="text" name="desc" class="form-control" placeholder="Опис страви" > -->
+                                    <!-- <textarea maxlength="5000"  id="form_message" name="desc" class="form-control" placeholder="Заповніть опис приготування страви" rows="4" ></textarea> -->
+                                    <input id="form_desc" type="text" value="<?=$title_desc?>" name="desc" class="form-control" placeholder="Опис страви" >
                                 </div>
                             </div>
 
